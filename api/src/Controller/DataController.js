@@ -1,36 +1,41 @@
 const axios = require('axios')
-const {Country, Activities } = require('../db')
+const { Country } = require('../db')
 
-
+// traigo los datos de la api y los mapeo:
 async function getAllCountries(req,res,next){
     try {
-        let countries = ( await axios('https://restcountries.com/v3/all')).data
-        countries = countries.map(c =>({
+        let countries = ( await axios('https://restcountries.com/v3/all')).data.map(c =>({
+            key: c.cca3,
             name: c.name.common,
-            imagen: c.flags[1],
-            continente: c.continents,
+            imagen: c.flags[0],
+            continente: c.continents?.toString(),
             subregion: c.subregion,
-            capital: c.capital,
+            capital: c.capital?.toString(),
             area: c.area,
             poblacion: c.population,
-            googleMaps: c.maps.googleMaps
-        }))
-        res.send(countries)
+            googleMaps: c.maps.googleMaps,
+        }));
+       countries.map (e => (
+           Country.findOrCreate({
+            where: {name: e.name},
+            defaults:{
+                key: e.key,
+                imagen: e.imagen,
+                continente: e.continente,
+                subregion: e.subregion,
+                capital: e.capital,
+                area: e.area,
+                poblacion: e.poblacion,
+                googleMaps: e.googleMaps
+            }
+        })))
+        res.send(countries);
     }
     catch (error) {  
-        next(error) 
+       console.log(error);
     }
 }
 
-async function getAllActivities (req,res,next){
-    try {
-        let activities = await Activities.findAll();
-        res.send(activities)
-    } catch (error) {
-        next(error)
-    }
-}
 module.exports ={
     getAllCountries,
-    getAllActivities
 }

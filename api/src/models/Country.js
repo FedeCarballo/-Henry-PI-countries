@@ -4,10 +4,9 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
-    id:{
-      type: DataTypes.STRING(3),
-      allowNull: false,
-      primaryKey: true
+   key:{
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -16,33 +15,35 @@ module.exports = (sequelize) => {
     imagen: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Indefinido"
+      defaultValue: "https://img2.freepng.es/20180221/uhw/kisspng-earth-planet-youtube-life-god-planet-earth-5a8e25d036ad62.653111381519265232224.jpg"
     },
     continente: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "Indefinido"
+      defaultValue: "sin definir",
     },
     capital: {
       type: DataTypes.STRING,
       allowNull: false, 
-      defaultValue: "Indefinido"
+      defaultValue: "sin definir",
     },
     subregion: {
       type: DataTypes.STRING,
       allowNull: true
     },
     area: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     poblacion: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     googleMaps:{
       type: DataTypes.STRING,
       allowNull: true
     }
+  }, {
+    timestamps: false,
   });
 };
