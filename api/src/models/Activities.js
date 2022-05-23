@@ -16,12 +16,13 @@ module.exports = (sequelize) => {
         allowNull: false
     },
     temporada: {
-        type: DataTypes.ENUM('verano', 'otoño','invierno','primavera'),
+        type: DataTypes.ENUM('verano', 'otonio','invierno','primavera'),
         allowNull:false
     },
     imagen:{
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: "https://www.vistazo.com/vistazo/sites/default/files/field/image/2015/12/12/confused-travolta-meme.jpg"
     }
   });
 };
