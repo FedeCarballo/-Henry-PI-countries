@@ -4,14 +4,35 @@ const { activitiesFromDB } = require('../Controller/DataController');
 const {Activities} = require('../db');
 const router = Router();
 
-
+// Traigo todas mis actividades de mi db: 
 router.get('/', async (req,res) =>{
     try { 
        const activities = await activitiesFromDB();
-        res.send(activities.length>0 ? activities : [])
+
+       if(!activities.length){
+          return res.send("No hay actividades")
+       }
+        res.send(activities)
     } catch (error) {
         res.send(error)
     }
+})
+
+// Filtro actividades por id de mi db: 
+router.get('/:id', async (req,res)=>{
+    try {
+        let countries = await Activities.findAll();
+        const id = req.params.id
+        const SigleActivitie = countries.filter(c => id == c.id)
+        
+        if (!SigleActivitie.length) {
+            return res.status(404).json({message: `No se encuentra actividad solicitada con el id: ${id}`});
+        }
+        return res.send(SigleActivitie);
+    
+        } catch (error) {
+            next(error)
+        }
 })
 
 // [ ] POST /activity:

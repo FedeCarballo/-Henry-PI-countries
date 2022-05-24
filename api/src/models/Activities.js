@@ -24,5 +24,8 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: "https://www.vistazo.com/vistazo/sites/default/files/field/image/2015/12/12/confused-travolta-meme.jpg"
     }
+  },
+  {
+    timestamps: false,
   });
 };
