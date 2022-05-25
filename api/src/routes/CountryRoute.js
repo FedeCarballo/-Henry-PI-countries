@@ -6,7 +6,6 @@ const router = Router();
 
 router.use(express.json())
 
-
 // [ ] GET /countries: [ ] GET /countries?name="...":
 // En una primera instancia deberán traer todos los países desde restcountries y guardarlos en su propia base de datos y luego ya utilizarlos desde allí (Debe almacenar solo los datos necesarios para la ruta principal)
 // Obtener los países que coincidan con el nombre pasado como query parameter (No necesariamente tiene que ser una matcheo exacto)
@@ -29,6 +28,8 @@ router.get('/',async (req,res,next) =>{
             if (!countries.length>0) {
               return  res.status(404).json({message: "No se encontraron paises"}); //si no cargo los paises en mi db, mostrara este error 404
             }
+
+
             res.send(countries) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
         }
     } catch (error) {
@@ -41,7 +42,6 @@ router.get('/',async (req,res,next) =>{
 // Obtener el detalle de un país en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de país
 // Incluir los datos de las actividades turísticas correspondientes
-
 router.get('/:id',async (req,res,next) =>{
     try {
     let countries = await Country.findAll();
@@ -57,6 +57,23 @@ router.get('/:id',async (req,res,next) =>{
     }
 });
 
+//funcionalidades extra: 
 
+//eliminar paises de mi db:
+
+//eliminar actividades por id:
+router.delete('/delete/:id', (req,res)=> {
+    try {
+        let {id} = req.params
+        Country.destroy({
+            where: {
+                id: id
+            }
+        })
+        res.send("pais eliminado correctamente")
+    } catch (error) {
+        
+    }
+})
 
 module.exports = router;

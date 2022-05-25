@@ -18,23 +18,6 @@ router.get('/', async (req,res) =>{
     }
 })
 
-// Filtro actividades por id de mi db: 
-router.get('/:id', async (req,res)=>{
-    try {
-        let countries = await Activities.findAll();
-        const id = req.params.id
-        const SigleActivitie = countries.filter(c => id == c.id)
-        
-        if (!SigleActivitie.length) {
-            return res.status(404).json({message: `No se encuentra actividad solicitada con el id: ${id}`});
-        }
-        return res.send(SigleActivitie);
-    
-        } catch (error) {
-            next(error)
-        }
-})
-
 // [ ] POST /activity:
 // Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
 // Crea una actividad turística en la base de datos
@@ -52,6 +35,42 @@ router.post('/', async (req,res) =>{
     } catch (error) {
         res.send(error)
     }
+})
+
+
+// funcionalidades extra de enrutados: 
+
+//eliminar actividades por id:
+router.delete('/delete/:id', (req,res)=> {
+
+    try {
+        let {id} = req.params
+        Activities.destroy({
+            where: {
+                id: id
+            }
+        })
+        res.send("actividad eliminada")
+    } catch (error) {
+        
+    }
+})
+
+// Filtro actividades por id de mi db: 
+router.get('/:id', async (req,res)=>{
+    try {
+        let countries = await Activities.findAll();
+        const id = req.params.id
+        const SigleActivitie = countries.filter(c => id == c.id)
+        
+        if (!SigleActivitie.length) {
+            return res.status(404).json({message: `No se encuentra actividad solicitada con el id: ${id}`});
+        }
+        return res.send(SigleActivitie);
+    
+        } catch (error) {
+            next(error)
+        }
 })
 
 module.exports = router;
