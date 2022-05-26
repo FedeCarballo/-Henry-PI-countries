@@ -1,31 +1,50 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
-
+import Pagination from './Pagination';
 import { getAllCountries } from '../redux/actions'
 import SingleCard from './SingleCard';
+import Loading from './Loading';
 
 function Home() {
+    const [currentpage, setcurrentpage] = useState(1);
+    const [countriesperpage] = useState(10);
+    const [loading, setloading] = useState(false);
     const dispatch = useDispatch()
-    
     const countries = useSelector(state => state.countries);
 
     useEffect(()=>{
-        dispatch(getAllCountries())
-    },[dispatch])
+       dispatch(getAllCountries())
+    },[])
 
-    function ActivitieInutil(){
-        alert("dije que no hacia nada")
-    }
+    
+    //-----------------carga de la pagina------------------// 
+    useEffect(()=>{
+        setTimeout(() => {
+            setloading(true)
+        },2000)
+    })
+
+    //-----------------Paginacion------------------// 
+    const indexLastCountries = currentpage * countriesperpage;
+    const indexFirtsCountries = indexLastCountries - countriesperpage;
+    const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries);
+
+    const paginate = (n) => setcurrentpage(n)
+     //-----------------Paginacion------------------// 
+
     return (
     <div>
-        <button onClick={ActivitieInutil}> 
-            hagame click que soy inutil y no hago nada
-        </button>
         <Link to="/">
-        <button>Hagame click, juro que no hago nada</button>
+        <button>Hagame click, voy a filtrar por nombre</button>
         </Link>
-        {countries.map((e,i) => <SingleCard name={e.name} id={i} imagen={e.imagen} capital={e.capital}/>)}
+        {
+            loading === false ? <Loading /> : 
+        <div>
+            {currentCountries.map((e,i) => <SingleCard countries={currentCountries} subregion={e.googleMaps} name={e.name} id={i} imagen={e.imagen} capital={e.capital}/>)}
+            <Pagination countriesperpage={countriesperpage} totalCountries={countries.length} paginate={paginate} />
+        </div>}
+
     </div>
   )
 }

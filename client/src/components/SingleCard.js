@@ -1,16 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function SingleCard({name, capital,imagen,id}) {
+function SingleCard({name, capital,imagen,id,subregion}) {
+
   return (
-    <div>
-    <h1>{name}</h1> 
-     <h2>{capital}</h2>
-     <img src={imagen} alt={name}></img>
-     <Link to={`/countries/detail/${id}`}>
-         <button>Hagame click, juro que no hago nada</button>
+    <div id={id}>
+      <h1>{name}</h1> 
+      <h2>{subregion}</h2>
+      <h2>{capital}</h2>
+      <img src={imagen} alt={name}></img>
+      <Link to={`/countries/detail/${id}`}>
+         <button>ver mas detalles</button>
      </Link>
- </div>
+    </div>
   )
 }
 
