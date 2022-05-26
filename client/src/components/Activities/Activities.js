@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllActivities } from '../redux/actions';
+import { getAllActivities } from '../../redux/actions';
 
 function Activities() {
 

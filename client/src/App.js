@@ -1,9 +1,9 @@
 import './App.css';
-import Home from './components/home';
+import Home from './components/Home/home';
 import {Routes, Route} from 'react-router-dom'
-import Landing from './components/Landing';
-import Detail from './components/Detail';
-import Activities from './components/Activities';
+import Landing from './components/Landing/Landing';
+import Detail from './components/Detail/Detail';
+import Activities from './components/Activities/Activities';
 
 function App() {
   return (

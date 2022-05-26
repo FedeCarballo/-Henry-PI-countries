@@ -38,6 +38,16 @@ const GetCountriesdb = async () =>{
      })))
 }
 
+const getCountries = async () =>{
+    return await Country.findAll({
+        include:{
+            model: Activities,
+            through: {
+                attributes: [],
+            }
+        }
+    })
+}
 // Obtengo las actividades de mi db:
 const activitiesFromDB = async () =>{
     return await Activities.findAll();
@@ -46,5 +56,6 @@ const activitiesFromDB = async () =>{
 module.exports ={
     getAllCountries,
     GetCountriesdb,
-    activitiesFromDB
+    activitiesFromDB,
+    getCountries
 }

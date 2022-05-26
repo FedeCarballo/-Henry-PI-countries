@@ -1,7 +1,7 @@
 const { Router} = require('express');
 const express = require('express')
-const { getAllCountries, GetCountriesdb } = require('../Controller/DataController');
-const {Country} = require('../db')
+const { getAllCountries, GetCountriesdb, getCountries } = require('../Controller/DataController');
+const {Country, Activities} = require('../db')
 const router = Router();
 
 router.use(express.json())
@@ -14,13 +14,13 @@ router.use(express.json())
 router.get('/',async (req,res,next) =>{
     try {
         let name = req.query.name;
-        let countries = await getAllCountries();
+        await GetCountriesdb()
+        let countries = await getCountries();
         if(name){
             let SingleCountry = countries.filter(c => c.name.toLowerCase() === name.toLowerCase())
             if(!SingleCountry.length>0){
               return  res.status(404).send({message: `No se encontro pais solicitado con el nombre: ${name}, por favor verifique si los caracteres ingresados son validos`}) 
               // me trae el mensaje de error con el name del pais seleccionado indicando que no matcheo el resultado, ya que el length sera 0
-    
             }
             res.send(SingleCountry.length > 0 ? SingleCountry : ` ${name}`)
         }
@@ -28,9 +28,15 @@ router.get('/',async (req,res,next) =>{
             if (!countries.length>0) {
               return  res.status(404).json({message: "No se encontraron paises"}); //si no cargo los paises en mi db, mostrara este error 404
             }
-
-
-            res.send(countries) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
+            const c = await Country.findAll({
+                order: [
+                  ['name', 'ASC']
+                ],
+                include: {
+                  model: Activities,
+                }
+              })
+              return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
         }
     } catch (error) {
         next(error)
@@ -44,7 +50,15 @@ router.get('/',async (req,res,next) =>{
 // Incluir los datos de las actividades turísticas correspondientes
 router.get('/:id',async (req,res,next) =>{
     try {
-    let countries = await Country.findAll();
+    let countries = await Country.findAll(
+       { include: {
+            model: Activities,
+            atributes: [  "name", "dificultad","duracion","temporada"],
+            through:{
+                atributes:[]
+            }
+        }}
+    );
     const id = req.params.id
     const SingleCountry = countries.filter(c => id == c.id)
     if (!SingleCountry.length) {

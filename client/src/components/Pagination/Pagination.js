@@ -1,5 +1,5 @@
 import React from "react";
-
+import './Pagination.css'
 const pagination = ({countriesperpage, totalCountries, paginate}) => {
     
     const countriesPage = [];
@@ -10,7 +10,7 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
     }
     return(
     <div>
-        <nav>
+        <nav className="pagination">
             <ul>
                 {
                     countriesPage.map(n => (

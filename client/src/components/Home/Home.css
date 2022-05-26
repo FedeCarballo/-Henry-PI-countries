@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+.CardsContainer{
+    margin-top: 6vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.CardsContainer div{
+    transition: all 1s ease-in-out;
+    width: 10%;
+}

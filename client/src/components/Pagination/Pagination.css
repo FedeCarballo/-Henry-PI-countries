@@ -1,0 +1,12 @@
+.pagination ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.pagination ul li {
+    margin: 1.5vh ;
+    text-decoration: none;
+    list-style:none;
+    width: 5%;
+}
