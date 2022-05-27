@@ -4,6 +4,15 @@
     box-sizing: border-box;
     text-decoration: none;
 }
+.Busqueda{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    padding: 2vh;
+    font-size: 2rem;
+    border-radius: 15px;
+}
 .CardsContainer{
     margin-top: 6vh;
     display: flex;
@@ -15,4 +24,5 @@
 .CardsContainer div{
     transition: all 1s ease-in-out;
     width: 10%;
+    margin: 3vh 4vh;
 }

@@ -12,12 +12,13 @@ function Home() {
     const [countriesperpage] = useState(10);
     const [loading, setloading] = useState(false);
     const [search, setsearch] = useState('')
-
+    const [paises, setpaises] = useState('')
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries);
 
     useEffect(()=>{
        dispatch(getAllCountries())
+        setpaises(countries)
     },[])
     
     //-----------------carga de la pagina------------------// 
@@ -27,28 +28,53 @@ function Home() {
         },1400)
     })
 
-    //-------------------filters--------------------//
- 
+    //-------------------Busqueda--------------------//
+    
     const searchInput = (e) =>{
         paginate(1);
+        setsearch(e);
     }
     //-----------------Paginacion------------------// 
+    
     const indexLastCountries = currentpage * countriesperpage;
     const indexFirtsCountries = indexLastCountries - countriesperpage;
     const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries);
-
     const paginate = (n) => setcurrentpage(n)
-     //-----------------Paginacion------------------// 
+    
+    //-----------------Paginacion------------------// 
 
     return (
     <div>
-        <div>
-            <input placeholder='buscar pais' onChange={e => searchInput(e.target.value)}></input>
-        </div>
+
+            <label>puedes buscar por Pais, continente, subregion o capital</label>
+            <input className='Busqueda' placeholder='buscar' onChange={e => searchInput(e.target.value)}></input>
+            <br/>
+        <hr/>
         {
-            loading === false ? <Loading /> : 
+            loading === false ? 
+            <Loading /> : 
         <div className='CardsContainer'>
-            {currentCountries.map((e,i) => <SingleCard key={i} countries={currentCountries} subregion={e.googleMaps} name={e.name} id={e.id} imagen={e.imagen} capital={e.capital}/>)}
+        {/* Estamos usando countries, al cambiar a Currentcountries se activa el paginado, hay que fixear eso */}
+            {countries.filter((val) =>{
+                if (search === '') {
+                    return val
+                }
+                else if (val.name.toLowerCase().includes(search.toLowerCase())){
+                    return val
+                }
+                else if (val.capital.toLowerCase().includes(search.toLowerCase())){
+                    return val
+                }
+                else if (val.continente.toLowerCase().includes(search.toLowerCase())){
+                    return val
+                }
+            }).map((e,i) => 
+            <SingleCard key={i} 
+            countries={currentCountries} 
+            subregion={e.googleMaps} 
+            name={e.name} id={e.id} 
+            imagen={e.imagen} 
+            capital={e.capital}/>)}
         </div>}
             <Pagination countriesperpage={countriesperpage} totalCountries={countries.length} paginate={paginate} />
 

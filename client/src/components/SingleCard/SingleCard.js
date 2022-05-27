@@ -8,7 +8,7 @@ function SingleCard({name, capital,imagen,id,subregion}) {
       <h1>{name}</h1> 
       <h2>{subregion}</h2>
       <h2>{capital}</h2>
-      <img src={imagen} alt={name}></img>
+      <img src={imagen} alt={name}/>
       <Link to={`/countries/detail/${id}`}>
          <button>ver mas detalles</button>
      </Link>
