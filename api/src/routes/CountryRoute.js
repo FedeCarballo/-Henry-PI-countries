@@ -18,6 +18,7 @@ router.get('/',async (req,res,next) =>{
         let countries = await getCountries();
         if(name){
             let SingleCountry = countries.filter(c => c.name.toLowerCase() === name.toLowerCase())
+            
             if(!SingleCountry.length>0){
               return  res.status(404).send({message: `No se encontro pais solicitado con el nombre: ${name}, por favor verifique si los caracteres ingresados son validos`}) 
               // me trae el mensaje de error con el name del pais seleccionado indicando que no matcheo el resultado, ya que el length sera 0
@@ -34,6 +35,11 @@ router.get('/',async (req,res,next) =>{
                 ],
                 include: {
                   model: Activities,
+                  atributes: [  "name", "dificultad","duracion","temporada", "id"],
+                  through:{
+                    atributes:[]
+                }
+                     //COSAS A PRESTAR ATENCION
                 }
               })
               return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
@@ -54,9 +60,6 @@ router.get('/:id',async (req,res,next) =>{
        { include: {
             model: Activities,
             atributes: [  "name", "dificultad","duracion","temporada"],
-            through:{
-                atributes:[]
-            }
         }}
     );
     const id = req.params.id

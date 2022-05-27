@@ -9,7 +9,7 @@ function SingleCard({name, capital,imagen,id,subregion}) {
       <h2>{subregion}</h2>
       <h2>{capital}</h2>
       <img src={imagen} alt={name}/>
-      <Link to={`/countries/detail/${id}`}>
+      <Link to={`/countries/${id}`} content={name}>
          <button>ver mas detalles</button>
      </Link>
     </div>

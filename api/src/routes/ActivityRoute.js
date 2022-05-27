@@ -1,18 +1,25 @@
 const { Router } = require('express');
 const express = require('express');
 const { activitiesFromDB } = require('../Controller/DataController');
-const {Activities} = require('../db');
+const {Activities, Country} = require('../db');
 const router = Router();
 
 // Traigo todas mis actividades de mi db: 
 router.get('/', async (req,res) =>{
     try { 
-       const activities = await activitiesFromDB();
-
+       const activities = await Activities.findAll({
+            include: {
+                model: Country,
+                atributes: [  "name", "capital","continente","subregion", "id"],
+                through:{
+                atributes:[]
+                }
+            }
+       })
        if(!activities.length){
           return res.send("No hay actividades")
        }
-        res.send(activities)
+        res.send(activities.length >0 ? activities : null )
     } catch (error) {
         res.send(error)
     }
@@ -23,15 +30,23 @@ router.get('/', async (req,res) =>{
 // Crea una actividad turística en la base de datos
 router.post('/', async (req,res) =>{
     try {
-        const { name, dificultad, duracion, temporada, imagen } = req.body; 
+        const { name, dificultad, duracion, temporada, imagen, country } = req.body; 
         const newActivity = await Activities.create({
-            name: name, 
-            dificultad: dificultad, 
-            duracion: duracion,
-            temporada: temporada,
-            imagen: imagen,
+             name, 
+             dificultad, 
+             duracion,
+             temporada,
+             imagen,
         });
-        res.send(newActivity);
+        const ActivitiePerCountry = await Country.findAll({
+            where:{
+                name: country
+            }
+        })
+        await newActivity.addCountry(ActivitiePerCountry);
+
+        res.status(200).send('Activity created successfully')
+
     } catch (error) {
         res.send(error)
     }

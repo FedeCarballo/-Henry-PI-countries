@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
-import { BuscarPais, getAllCountries, OrdenAlfabetico } from '../../redux/actions'
+import {  getAllCountries } from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
 import './Home.css'
@@ -12,7 +12,7 @@ function Home() {
     const [countriesperpage] = useState(10);
     const [loading, setloading] = useState(false);
     const [search, setsearch] = useState('')
-    const [paises, setpaises] = useState('')
+    const [, setpaises] = useState('')
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries);
 
@@ -45,9 +45,7 @@ function Home() {
 
     return (
     <div>
-
-            <label>puedes buscar por Pais, continente, subregion o capital</label>
-            <input className='Busqueda' placeholder='buscar' onChange={e => searchInput(e.target.value)}></input>
+            <input className='Busqueda' placeholder='buscar por Pais, continente, subregion o capital' onChange={e => searchInput(e.target.value)}></input>
             <br/>
         <hr/>
         {
@@ -71,7 +69,7 @@ function Home() {
             }).map((e,i) => 
             <SingleCard key={i} 
             countries={currentCountries} 
-            subregion={e.googleMaps} 
+            subregion={e.subregion} 
             name={e.name} id={e.id} 
             imagen={e.imagen} 
             capital={e.capital}/>)}

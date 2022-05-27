@@ -10,7 +10,7 @@ function reducer(state=initialState, {type, payload}){
                 ...state,
                 countries: payload
             }
-        case "ALPHABETICAL_ORDER":
+        case "GET_SINGLE_COUNTRY":
                 return{
                     ...state,
                     countries: payload
