@@ -20,7 +20,11 @@ function reducer(state=initialState, {type, payload}){
                 ...state,
                 activities: payload
                 }
-
+        case "CREATE_ACTIVITY":
+            return{
+                ...state,
+                activities: state.activities.concat(payload)
+            }
         default: return state
     }
 
