@@ -1,0 +1,50 @@
+.Form__container{
+  background-color: rgba(25, 25, 25, 0.113);
+  backdrop-filter: blur(4px);
+  margin:60px auto;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border: solid rgb(12, 16, 12) 2px;
+  border-radius: 15px;
+}
+.Form__container div{
+  text-align: center;
+  font-size:3vh;
+  margin: 2vh 0;
+}
+
+.Formulario{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: auto;
+}
+
+
+.Formulario label {
+  color:rgb(0, 0, 0);
+  font-size: 3vh;
+  margin: 20px 0 20px 0;
+  font-weight: 600;
+}
+
+.Formulario input{
+  padding: 15px;
+  border-radius:14px;
+  background-color: rgba(255, 255, 255, 0.585);
+}
+.Formulario button{
+  width: 45%;
+  margin: 30px auto;
+  padding: 20px;
+  font-size: 3.2vh;
+  border-radius: 25px;
+  transition: all 800ms;
+}
+.Formulario button:hover{
+  cursor:pointer;
+  box-shadow: rgb(0, 0, 0) -14px 20px 10px;
+  transform: scale(1.02) translateX(8px) translateY(-8px);
+
+}

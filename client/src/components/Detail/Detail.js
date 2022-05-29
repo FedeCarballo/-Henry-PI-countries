@@ -1,18 +1,20 @@
 import React, {useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
-import { getSingleCountry } from '../../redux/actions';
+import { getAllActivities, getSingleCountry } from '../../redux/actions';
 import Navbar from '../Navbar/Navbar';
-import {Detail__div, Detail__Container, Activities_Details, Country_Details,Detail_subcontainer, Detail_div_text} from './Detail.module.css'
+import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text} from './Detail.module.css'
 function Detail () {
 
     const params = useParams()
 
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries);
+    const activities = useSelector(state => state.activities);
     
     useEffect(()=>{
        dispatch(getSingleCountry(params.id))
+       dispatch(getAllActivities())
     },[dispatch])
 
   return (
@@ -39,32 +41,30 @@ function Detail () {
                 {countries[0]?.subregion}
               </h2>
         </div>
-        {
-
+       <div className={Activities_Details}> 
+          <h2>
+            Actividades a realizar en este pais:
+          </h2>
+       {
         countries[0]?.activities.length>0 ?
-        <div className={Activities_Details}>
-        <h2>
-          Actividades a realizar en este pais:
-        </h2>
-            <p>
-              {countries[0]?.activities[0]?.name}
+        activities.map(e => 
+        <div>
+           <p>
+             {e.name}
             </p>
             <p>
-             nombre: {countries[0]?.activities[1]?.name}
+            dificultad: {e.dificultad}
             </p>
-            <p>
-             dificultad: {countries[0]?.activities[0]?.dificultad}
+             <p>
+             duracion: {e.duracion}
             </p>
-            <p>
-             duracion: {countries[0]?.activities[0]?.duracion}
+             <p>
+             temporada: {e.temporada}
             </p>
-            <p>
-             temporada: {countries[0]?.activities[0]?.temporada}
-            </p>
-            <img src={countries[0]?.activities[0]?.imagen} />
-      </div>
+            <img src={e.imagen} />
+        </div>)
         : 
-        <div className={Activities_Details}>
+        <div>
           <h3>
             No hay activivades designadas.
           </h3>
@@ -75,7 +75,7 @@ function Detail () {
             </button>
           </Link>
         </div>
-        }
+        }</div>
         
       </div>
     </div>
