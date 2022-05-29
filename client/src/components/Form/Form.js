@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import './Form.css'
 function Form() {
 
     const DefaultStatus = {nombre:" ", dificultad:" ", duracion:" ", temporada:"", countries:""}
@@ -14,6 +14,7 @@ function Form() {
             <label>Dificultad:</label><input/>
             <label>Duracion:</label><input/>
             <label>temporada:</label><input/>
+            <button class="button-49" role="button">Button 49</button>
 
         </form>
     </div>
