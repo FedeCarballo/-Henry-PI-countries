@@ -6,20 +6,21 @@ import {  getAllCountries } from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
 import './Home.css'
+import Navbar from '../Navbar/Navbar';
 
 function Home() {
     const [currentpage, setcurrentpage] = useState(1);
     const [countriesperpage] = useState(10);
     const [loading, setloading] = useState(false);
     const [search, setsearch] = useState('')
-    const [, setpaises] = useState('')
+    const [paises, setpaises] = useState('')
+    const countries = useSelector( state => state.countries);
     const dispatch = useDispatch()
-    const countries = useSelector(state => state.countries);
 
     useEffect(()=>{
        dispatch(getAllCountries())
         setpaises(countries)
-    },[])
+    },[dispatch])
     
     //-----------------carga de la pagina------------------// 
     useEffect(()=>{
@@ -39,21 +40,23 @@ function Home() {
     const indexLastCountries = currentpage * countriesperpage;
     const indexFirtsCountries = indexLastCountries - countriesperpage;
     const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries);
+    
     const paginate = (n) => setcurrentpage(n)
     
     //-----------------Paginacion------------------// 
 
+
     return (
     <div>
+        <Navbar />
             <input className='Busqueda' placeholder='buscar por Pais, continente, subregion o capital' onChange={e => searchInput(e.target.value)}></input>
             <br/>
-        <hr/>
         {
             loading === false ? 
             <Loading /> : 
         <div className='CardsContainer'>
         {/* Estamos usando countries, al cambiar a Currentcountries se activa el paginado, hay que fixear eso */}
-            {countries.filter((val) =>{
+            {currentCountries.filter((val) =>{
                 if (search === '') {
                     return val
                 }

@@ -10,7 +10,7 @@ function Landing() {
           <h1>Bienvenido a la Country App</h1>
         </div>
         <Link to="/countries">
-          <button className={button85} role="button">Mostrar paises</button>
+          <button className={button85}>Mostrar paises</button>
         </Link>
           <Links />
     </div>

@@ -1,0 +1,72 @@
+.Detail__Container{
+    height: 100vh;
+}
+.Detail_subcontainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} 
+
+.Country_Details{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 2vh;
+    width: 25%;
+    backdrop-filter: brightness(.75);
+}
+.Country_Details p{
+    font-size: 3vh;
+    color: white;
+}
+.Detail__div{
+    background-color:rgba(0, 0, 0, 0.132);
+    backdrop-filter: blur(2px);
+    width: 33%;
+    border-radius: 15px;
+    display: flex;
+    margin: 8vh auto;
+    align-self: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.Detail_div_text{
+    margin: auto;
+    width: 80%;
+    font-size: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
+    align-items: flex-end;
+}
+.Detail_div_text h1{
+    text-transform: uppercase;
+    font-weight: 800;
+}
+.Detail__div img{
+    width: 80%;
+}
+
+.Activities_Details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3vh;
+    width: 25%;
+    border-radius: 20px;
+    height: 100vh;
+    padding: 3vh;
+    color: white;
+    font-size: 3vh;
+    text-align: center;
+}
+.Activities_Details img{
+    width: 300px;
+
+}

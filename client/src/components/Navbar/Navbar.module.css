@@ -1,0 +1,26 @@
+.Navbar_container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+.Navbar_container img{
+    width: 50px;
+    margin: 1.3vh;
+}
+.Navbar_container ul {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+}
+.Navbar_container ul a {
+    border: 0 3px 4px solid black;
+    list-style: none;
+    margin: 0 3vh;
+    padding: 15px;
+    font-size: 3vh;
+    color: white;
+}
+a:hover{
+    cursor: pointer;
+}
