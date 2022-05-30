@@ -24,10 +24,10 @@ function Detail () {
       </div>
     <div className={Detail_subcontainer}> 
         <div className={Country_Details}>
-              <p>Continente: {countries[0]?.continente}</p>
+              <p>Continent: {countries[0]?.continente}</p>
               <p>Subregion: {countries[0]?.subregion}</p>
               <p>Area: {countries[0]?.area} km²</p>            
-              <p>Poblacion: {countries[0]?.poblacion}</p>
+              <p>Population: {countries[0]?.poblacion}</p>
               <p>ID: {countries[0]?.key}</p>
         </div>
 
@@ -43,7 +43,7 @@ function Detail () {
         </div>
        <div className={Activities_Details}> 
           <h2>
-            Actividades a realizar en este pais:
+            Activities:
           </h2>
        {
         countries[0]?.activities.length>0 ?
@@ -53,25 +53,25 @@ function Detail () {
              {e.name}
             </p>
             <p>
-            dificultad: {e.dificultad}
+            difficulty: {e.dificultad}
             </p>
              <p>
-             duracion: {e.duracion}
+             duration: {e.duracion}
             </p>
              <p>
-             temporada: {e.temporada}
+             season: {e.temporada}
             </p>
             <img src={e.imagen} />
         </div>)
         : 
         <div>
           <h3>
-            No hay activivades designadas.
+          there is no designated activity for this country
           </h3>
-          <p>deseas crear una actividad para este pais?</p>
+          <p>do you want to create one?</p>
           <Link to="/countries/activities/create">
             <button>
-              Crear actividad
+             Create New activity
             </button>
           </Link>
         </div>

@@ -14,16 +14,16 @@ function Navbar() {
         <ul>
 
            <Link to='/'>
-                <a>Inicio</a> 
+                <a>Home</a> 
            </Link>
            <Link to='/countries'>
-                <a>Ver Paises</a>       
+                <a>Countries</a>       
            </Link>
             <Link to='/countries/activities'>
-                <a>Ver actividades</a>
+                <a>Activities</a>
             </Link>
             <Link to='/countries/activities/create'>
-                <a>Crear Actividad</a>
+                <a>New activity</a>
             </Link>
         </ul>
     </div>
