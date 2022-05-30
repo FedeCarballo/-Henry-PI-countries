@@ -7,10 +7,11 @@ function Landing() {
   return (
     <div className={PrincipalContainer}>
         <div className={seven}>
-          <h1>Bienvenido a la Country App</h1>
+          <h1>Wellcome to the Country app</h1>
+          <h4>Find or Create your favorite activities around the world</h4>
         </div>
         <Link to="/countries">
-          <button className={button85}>Mostrar paises</button>
+          <button className={button85}>Let's Go</button>
         </Link>
           <Links />
     </div>

@@ -17,7 +17,7 @@ router.get('/', async (req,res) =>{
             }
        })
        if(!activities.length){
-          return res.send("No hay actividades")
+          return res.send([])
        }
         res.send(activities.length >0 ? activities : null )
     } catch (error) {

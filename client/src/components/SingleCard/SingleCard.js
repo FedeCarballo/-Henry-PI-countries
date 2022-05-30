@@ -10,7 +10,7 @@ function SingleCard({name, capital,imagen,id,subregion}) {
       <h2>{capital}</h2>
       <img src={imagen} alt={name}/>
       <Link to={`/countries/${id}`} content={name}>
-         <button className={button85}>ver mas detalles</button>
+         <button className={button85}>Details</button>
      </Link>
     </div>
   )

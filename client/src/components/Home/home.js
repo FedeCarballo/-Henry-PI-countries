@@ -49,7 +49,7 @@ function Home() {
     return (
     <div>
         <Navbar />
-            <input className='Busqueda' placeholder='buscar por Pais, continente, subregion o capital' onChange={e => searchInput(e.target.value)}></input>
+            <input className='Busqueda' placeholder='Find by country, continent, subregion or capital' onChange={e => searchInput(e.target.value)}></input>
             <br/>
         {
             loading === false ? 

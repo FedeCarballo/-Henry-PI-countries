@@ -1,19 +1,28 @@
-.PrincipalContainer{
+.err{
     display: flex;
     flex-direction: column;
+    height: 100vh;
     justify-content: space-around;
     align-items: center;
-    height: 100vh;
-    align-content: space-between;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.597);
+    backdrop-filter: blur(3px);
+}
+
+.err img{
+    width: 70%;
+    margin: auto;
+    border-radius: 25px;
 }
 
 .button85 {
     padding: 0.6em 2em;
+    margin: 2vh 0;
     border: none;
     outline: none;
     color: rgb(255, 255, 255);
-    background: rgba(17, 17, 17, 0.341);
-    font-size: 3vh;
+    background: rgb(17, 17, 17);
+    font-size: 2vh;
     cursor: pointer;
     position: relative;
     z-index: 0;
@@ -68,21 +77,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(34, 34, 34, 0.613);
+    background: rgb(34, 34, 34);
     left: 0;
     top: 0;
     border-radius: 10px;
   }
-.seven{
-    background-color:rgba(34, 34, 34, 0.116);
-    padding: 2.3vh;
-    border-radius: 20px;
-    backdrop-filter: blur(3px);
-}
-
-.seven h1{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
-    color: white;
-    font-size: 4vh;
-}
-
