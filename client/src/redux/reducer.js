@@ -15,6 +15,12 @@ function reducer(state=initialState, {type, payload}){
                     ...state,
                     countries: payload
                 }
+        case "GET_NAME":{
+            return{
+                ...state,
+                countries: payload
+            }
+        }
         case "GET_ALL_ACTIVITIES":
             return {
                 ...state,

@@ -38,8 +38,8 @@ const GetCountriesdb = async () =>{
      })))
 }
 
-const getCountries = async () =>{
-    return await Country.findAll({
+const getCountries =  () =>{
+    return  Country.findAll({
         include:{
             model: Activities,
         }

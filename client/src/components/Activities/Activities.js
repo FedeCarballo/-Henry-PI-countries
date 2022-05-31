@@ -12,7 +12,7 @@ function Activities() {
 
     useEffect(()=>{
         dispatch(getAllActivities())
-    },[])
+    },[dispatch])
   return (
    (
      <div> 

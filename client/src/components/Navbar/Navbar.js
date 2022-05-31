@@ -12,7 +12,6 @@ function Navbar() {
         <a href="https://github.com/FedeCarballo" target="_blank"><img src={gh} alt='Github' /></a>
         </div>
         <ul>
-
            <Link to='/'>
                 <a>Home</a> 
            </Link>

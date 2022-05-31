@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {Cards, button85} from './SingleCard.module.css'
-function SingleCard({name, capital,imagen,id,subregion}) {
+import {card, button85} from './SingleCard.module.css'
+function SingleCard({name, capital,imagen,id,subregion, continent}) {
 
   return (
-    <div id={id} className={Cards}>
+    <div id={id} className={card}>
       <h1>{name}</h1> 
-      <h2>{subregion}</h2>
       <h2>{capital}</h2>
+      <h2>{continent}</h2>
       <img src={imagen} alt={name}/>
       <Link to={`/countries/${id}`} content={name}>
          <button className={button85}>Details</button>

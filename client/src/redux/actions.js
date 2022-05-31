@@ -16,6 +16,15 @@ export function getSingleCountry(id){
     }
 }
 
+export function Getinput(name){
+    return async (dispatch) =>{
+        return axios("http://localhost:3001/countries?name=" + name)
+        .then(res => dispatch({
+            type: "GET_NAME",
+            payload: res.data
+        }))
+    }
+}
 //activities: 
 export function getAllActivities(){
     return async (dispatch)=>{ 

@@ -1,6 +1,6 @@
 const { Router} = require('express');
 const express = require('express')
-const { getAllCountries, GetCountriesdb, getCountries } = require('../Controller/DataController');
+const { GetCountriesdb, getCountries } = require('../Controller/DataController');
 const {Country, Activities} = require('../db')
 const router = Router();
 
@@ -12,12 +12,14 @@ router.use(express.json())
 // Si no existe ningún país mostrar un mensaje adecuado
 // Obtener un listado de los paises.
 router.get('/',async (req,res,next) =>{
+
+    let name = req.query.name;
+    await GetCountriesdb()
+    let countries = await getCountries();
+
     try {
-        let name = req.query.name;
-        await GetCountriesdb()
-        let countries = await getCountries();
         if(name){
-            let SingleCountry = countries.filter(c => c.name.toLowerCase() === name.toLowerCase())
+            let SingleCountry = countries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()))
             
             if(!SingleCountry.length>0){
               return  res.status(404).send({message: `No se encontro pais solicitado con el nombre: ${name}, por favor verifique si los caracteres ingresados son validos`}) 
@@ -30,16 +32,12 @@ router.get('/',async (req,res,next) =>{
               return  res.status(404).json({message: "No se encontraron paises"}); //si no cargo los paises en mi db, mostrara este error 404
             }
             const c = await Country.findAll({
-                order: [
-                  ['name', 'ASC']
-                ],
                 include: {
                   model: Activities,
                   atributes: [  "name", "dificultad","duracion","temporada", "id"],
                   through:{
                     atributes:[]
-                }
-                     //COSAS A PRESTAR ATENCION
+                    }
                 }
               })
               return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries

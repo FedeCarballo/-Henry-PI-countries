@@ -7,19 +7,18 @@ import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
 import './Home.css'
 import Navbar from '../Navbar/Navbar';
+import Searchbar from '../Searchbar/Searchbar';
 
 function Home() {
     const [currentpage, setcurrentpage] = useState(1);
     const [countriesperpage] = useState(10);
     const [loading, setloading] = useState(false);
-    const [search, setsearch] = useState('')
-    const [paises, setpaises] = useState('')
+    
     const countries = useSelector( state => state.countries);
     const dispatch = useDispatch()
 
     useEffect(()=>{
        dispatch(getAllCountries())
-        setpaises(countries)
     },[dispatch])
     
     //-----------------carga de la pagina------------------// 
@@ -28,13 +27,8 @@ function Home() {
             setloading(true)
         },1400)
     })
+    //-----------------carga de la pagina------------------// 
 
-    //-------------------Busqueda--------------------//
-    
-    const searchInput = (e) =>{
-        paginate(1);
-        setsearch(e);
-    }
     //-----------------Paginacion------------------// 
     
     const indexLastCountries = currentpage * countriesperpage;
@@ -49,28 +43,14 @@ function Home() {
     return (
     <div>
         <Navbar />
-            <input className='Busqueda' placeholder='Find by country, continent, subregion or capital' onChange={e => searchInput(e.target.value)}></input>
-            <br/>
+        <Searchbar />
         {
             loading === false ? 
             <Loading /> : 
         <div className='CardsContainer'>
-        {/* Estamos usando countries, al cambiar a Currentcountries se activa el paginado, hay que fixear eso */}
-            {currentCountries.filter((val) =>{
-                if (search === '') {
-                    return val
-                }
-                else if (val.name.toLowerCase().includes(search.toLowerCase())){
-                    return val
-                }
-                else if (val.capital.toLowerCase().includes(search.toLowerCase())){
-                    return val
-                }
-                else if (val.continente.toLowerCase().includes(search.toLowerCase())){
-                    return val
-                }
-            }).map((e,i) => 
+            {currentCountries.map((e,i) => 
             <SingleCard key={i} 
+            continent={e.continente}
             countries={currentCountries} 
             subregion={e.subregion} 
             name={e.name} id={e.id} 
