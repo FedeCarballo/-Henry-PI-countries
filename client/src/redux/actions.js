@@ -1,5 +1,4 @@
 import axios from 'axios'
-let id=250;
 
 //countries:
 export function getAllCountries(){
@@ -16,6 +15,7 @@ export function getSingleCountry(id){
     }
 }
 
+//Search:
 export function Getinput(name){
     return async (dispatch) =>{
         return axios("http://localhost:3001/countries?name=" + name)
@@ -25,6 +25,15 @@ export function Getinput(name){
         }))
     }
 }
+// Countries Filters:
+export function filterCountriesByContinent(payload){
+    console.log(payload);
+    return {
+        type: "FILTER_BY_CONTINENT",
+        payload
+    }
+}
+
 //activities: 
 export function getAllActivities(){
     return async (dispatch)=>{ 
@@ -33,11 +42,10 @@ export function getAllActivities(){
     }
 }
 
-export function createActivity(activity){
-    return function (dispatch){
-        return dispatch({
-            type: "CREATE_ACTIVITY",
-            payload: {id: id,...activity}
-        })
+export function createActivity(payload){
+    return async (dispatch) => {
+        const data = axios.post("http://localhost:3001/activities",payload)
+        console.log(data)
+        return data;
     }
 }

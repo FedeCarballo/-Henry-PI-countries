@@ -7,7 +7,6 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
         countriesPage.push(i);
     }
     return(
-    <div>
         <nav className="pagination">
             <ul>
                 {
@@ -19,7 +18,6 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
                 }
             </ul>
         </nav>
-    </div>
     )
 }
 

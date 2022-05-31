@@ -15,6 +15,15 @@ function reducer(state=initialState, {type, payload}){
                     ...state,
                     countries: payload
                 }
+        case "FILTER_BY_CONTINENT":
+
+            const allCountries = state.countries
+            const filter = payload === "All" ? allCountries : allCountries.filter(e => e.continent === payload)
+            return{
+                ...state,
+                countries: filter,
+            }
+        
         case "GET_NAME":{
             return{
                 ...state,
@@ -30,6 +39,10 @@ function reducer(state=initialState, {type, payload}){
             return{
                 ...state,
                 activities: state.activities.concat(payload)
+            }
+        case "POST_ACTIVITY":
+            return{
+                ...state,
             }
         default: return state
     }

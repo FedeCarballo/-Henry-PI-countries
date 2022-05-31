@@ -8,7 +8,7 @@ function Landing() {
     <div className={PrincipalContainer}>
         <div className={seven}>
           <h1>Wellcome to the Country app</h1>
-          <h4>Find or Create your favorite activities around the world</h4>
+          <h4>Find or Create your favorite activities around the world!</h4>
         </div>
         <Link to="/countries">
           <button className={button85}>Let's Go</button>

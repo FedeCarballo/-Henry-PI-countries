@@ -8,11 +8,11 @@ const getAllCountries = async() =>{
             key: c.cca3,
             name: c.name.common,
             imagen: c.flags[0],
-            continente: c.continents?.toString(),
+            continent: c.continents?.toString(),
             subregion: c.subregion,
-            capital: c.capital?.toString(),
+            capital: c.capital?.[0],
             area: c.area,
-            poblacion: c.population,
+            population: c.population,
             googleMaps: c.maps.googleMaps,
         }));
     return countries;
@@ -28,11 +28,11 @@ const GetCountriesdb = async () =>{
          defaults:{
              key: e.key,
              imagen: e.imagen,
-             continente: e.continente,
+             continent: e.continent,
              subregion: e.subregion,
              capital: e.capital, // capital no se muestra en psql ya que posee otro encode, pero en pgadmin aparece bien
              area: e.area,
-             poblacion: e.poblacion,
+             population: e.population,
              googleMaps: e.googleMaps
          }
      })))

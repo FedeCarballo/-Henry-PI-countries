@@ -34,7 +34,7 @@ router.get('/',async (req,res,next) =>{
             const c = await Country.findAll({
                 include: {
                   model: Activities,
-                  atributes: [  "name", "dificultad","duracion","temporada", "id"],
+                  atributes: [  "name", "dificulty","duration","season", "id"],
                   through:{
                     atributes:[]
                     }
@@ -57,7 +57,10 @@ router.get('/:id',async (req,res,next) =>{
     let countries = await Country.findAll(
        { include: {
             model: Activities,
-            atributes: [  "name", "dificultad","duracion","temporada"],
+            atributes: [  "name", "dificulty","duration","season"],
+            through:{
+                atributes:[]
+                }
         }}
     );
     const id = req.params.id

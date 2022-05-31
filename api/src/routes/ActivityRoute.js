@@ -10,9 +10,9 @@ router.get('/', async (req,res) =>{
        const activities = await Activities.findAll({
             include: {
                 model: Country,
-                atributes: [  "name", "capital","continente","subregion", "id"],
+                atributes: [  "name", "capital","continent","subregion", "id"],
                 through:{
-                atributes:[]
+                atributes:["name"]
                 }
             }
        })
@@ -30,12 +30,12 @@ router.get('/', async (req,res) =>{
 // Crea una actividad turística en la base de datos
 router.post('/', async (req,res) =>{
     try {
-        const { name, dificultad, duracion, temporada, imagen, country } = req.body; 
+        const { name, dificulty, duration, season, imagen, country } = req.body; 
         const newActivity = await Activities.create({
              name, 
-             dificultad, 
-             duracion,
-             temporada,
+             dificulty, 
+             duration,
+             season,
              imagen,
         });
         const ActivitiePerCountry = await Country.findAll({

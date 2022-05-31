@@ -56,8 +56,8 @@ function Home() {
             name={e.name} id={e.id} 
             imagen={e.imagen} 
             capital={e.capital}/>)}
-        </div>}
             <Pagination countriesperpage={countriesperpage} totalCountries={countries.length} paginate={paginate} />
+        </div>}
 
     </div>
   )

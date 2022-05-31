@@ -74,15 +74,21 @@
     border-radius: 10px;
   }
 .seven{
-    background-color:rgba(34, 34, 34, 0.116);
+    background-color:rgba(0, 0, 0, 0.468);
     padding: 2.3vh;
     border-radius: 20px;
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(15px);
 }
 
 .seven h1{
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
-    color: white;
-    font-size: 4vh;
+  margin:3vh 0;
+  color: #fff;
+  font-size: 4.2rem;
+  text-align: center;
+  text-transform: uppercase;
 }
-
+.seven h4{
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 400;
+}

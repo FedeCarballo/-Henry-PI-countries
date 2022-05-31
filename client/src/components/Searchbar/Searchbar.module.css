@@ -2,14 +2,42 @@
     margin: 3vh 0;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-around;
 }
 
-.Search input{
+.Search__filters{
+    align-self: center;
+}
+.Search__filters label{
+    font-size: 2rem;
+    margin-right: 1vh;
+    color: white;
+}
+.Search__filters select{
+    margin: 0 1vh;
+    background-color:rgba(0, 0, 0, 0.121);
+    backdrop-filter: blur(3px);
+    color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 15px;
+    border: none;
+    font-style: italic;
+}
+select option{
+    color: rgba(26, 25, 25, 0.603);
+    background-color:rgba(0, 0, 0, 0.121) !important;
+}
+
+.Search__search{
+    display: flex;
+    flex-direction: row;
+}
+.Search div input{
     justify-content: center;
     background-color:rgba(0, 0, 0, 0.121);
     display: flex;
-    padding: 2vh;
+    padding: 1vh;
     font-size: 1.5rem;
     border-radius: 15px;
     width: 550px;
@@ -26,7 +54,7 @@ input:placeholder-shown {
       color: white;
   }
 
-.Search button{
+.Search div button{
     background-color:rgba(0, 0, 0, 0.121);
     margin: 0 2vh;
     align-self: center;
@@ -36,11 +64,11 @@ input:placeholder-shown {
     border: 1px black;
     transition: all .5s ease-in-out;
 }
-.Search button:hover{
+.Search div button:hover{
     cursor: pointer;
     background-color:rgba(255, 255, 255, 0.439);
 }
 
-.Search button img{
+.Search div button img{
     width:60%;
 }
