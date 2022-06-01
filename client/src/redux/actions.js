@@ -27,11 +27,10 @@ export function Getinput(name){
 }
 // Countries Filters:
 export function filterCountriesByContinent(payload){
-    console.log(payload);
-    return {
-        type: "FILTER_BY_CONTINENT",
-        payload
-    }
+        return {
+            type: "FILTER_BY_CONTINENT",
+            payload
+        }
 }
 
 export function OrderByName(payload){
@@ -40,7 +39,17 @@ export function OrderByName(payload){
         payload
     }
 }
+export function OrderByPopulation(payload){
+    return{
+        type: "FILTER_BY_POPULATION",
+        payload
+    }
+}
+export const resetPage = () => dispatch => {
+    return dispatch({type: "RESET_PAGE"})
+}
 //activities: 
+
 export function getAllActivities(){
     return async (dispatch)=>{ 
         return axios("http://localhost:3001/activities")

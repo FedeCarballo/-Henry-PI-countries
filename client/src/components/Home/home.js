@@ -53,6 +53,7 @@ function Home() {
             {currentCountries.map((e,i) => 
             <SingleCard key={i} 
             continent={e.continente}
+            population= {e.population}
             countries={currentCountries} 
             subregion={e.subregion} 
             name={e.name} id={e.id} 

@@ -1,35 +1,37 @@
 import React,{ useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { filterCountriesByContinent, Getinput, OrderByName } from '../../redux/actions'
+import { filterCountriesByContinent, Getinput, OrderByName, OrderByPopulation, resetPage } from '../../redux/actions'
 import {Search,Search__filters, Search__search} from './Searchbar.module.css'
 import icon from '../../assets/search.svg'
 
 function Searchbar() {
 
-    const dispatch = useDispatch()
     const [name, setname] = useState('')
-    const [, setorder] = useState('')
+    
+    const dispatch = useDispatch()
+
     function handleChange(e){
         e.preventDefault()
         setname(e.target.value)
-        console.log(name);
     }
-
     function handlesubmit(e){
         e.preventDefault()
         dispatch(Getinput(name))
         setname('')
     }
-
+    //----------FILTROS----------//
     function handleFilterContinent(e){
         dispatch(filterCountriesByContinent(e.target.value))
     }
     function handleFilterAlphabetical(e){
-        e.preventDefault()
         dispatch(OrderByName(e.target.value))
-        
-        setorder(`Ordenado ${e.target.value}`)
+        dispatch(resetPage(1))
     }
+    function handleFiltePopulation(e){
+        dispatch(OrderByPopulation(e.target.value))
+        dispatch(resetPage(1))
+    }
+    //----------FILTROS----------//
   return (
         <div className={Search}>
             <div className={Search__filters}>
@@ -38,9 +40,9 @@ function Searchbar() {
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
-                <select>
-                    <option>Population: low to high</option>
-                    <option>Population: high to low</option>
+                <select onChange={e => handleFiltePopulation(e)} name="Population">
+                    <option value="low">Population: low to high</option>
+                    <option value="high">Population: high to low</option>
                 </select>
                 <select onChange={e => handleFilterContinent(e)}>
                     <option value="All">All continents</option>
