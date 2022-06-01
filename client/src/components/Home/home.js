@@ -25,7 +25,7 @@ function Home() {
     useEffect(()=>{
         setTimeout(() => {
             setloading(true)
-        },1400)
+        },1100)
     })
     //-----------------carga de la pagina------------------// 
 
@@ -47,6 +47,8 @@ function Home() {
         {
             loading === false ? 
             <Loading /> : 
+            <div>
+
         <div className='CardsContainer'>
             {currentCountries.map((e,i) => 
             <SingleCard key={i} 
@@ -56,8 +58,10 @@ function Home() {
             name={e.name} id={e.id} 
             imagen={e.imagen} 
             capital={e.capital}/>)}
+        </div>
             <Pagination countriesperpage={countriesperpage} totalCountries={countries.length} paginate={paginate} />
-        </div>}
+        </div>
+        }
 
     </div>
   )

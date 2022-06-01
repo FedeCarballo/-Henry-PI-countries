@@ -1,3 +1,6 @@
+.loadercontainer{
+    margin-top: 20vh;
+}
 .loader{
     display: flex;
     justify-content: center;

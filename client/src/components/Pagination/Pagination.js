@@ -1,5 +1,5 @@
 import React from "react";
-import './Pagination.css'
+import {container, pagination_ul} from './Pagination.module.css'
 
 const pagination = ({countriesperpage, totalCountries, paginate}) => {
     const countriesPage = [];
@@ -7,10 +7,11 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
         countriesPage.push(i);
     }
     return(
-        <nav className="pagination">
+        <div className={container}>
+        <nav className={pagination_ul}>
             <ul>
                 {
-                  countriesPage &&  countriesPage.map(n => (
+                    countriesPage &&  countriesPage.map(n => (
                         <li key={n}>
                            <a onClick={() => paginate(n)}>{n}</a>
                        </li>
@@ -18,6 +19,7 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
                 }
             </ul>
         </nav>
+    </div>
     )
 }
 
