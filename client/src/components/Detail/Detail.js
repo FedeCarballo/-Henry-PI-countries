@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
 import { getAllActivities, getSingleCountry } from '../../redux/actions';
 import Navbar from '../Navbar/Navbar';
-import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text} from './Detail.module.css'
+import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text, button85, Activities__null} from './Detail.module.css'
 function Detail () {
 
     const params = useParams()
@@ -24,10 +24,10 @@ function Detail () {
       </div>
     <div className={Detail_subcontainer}> 
         <div className={Country_Details}>
-              <p>Continent: {countries[0]?.continente}</p>
+              <p>Continent: {countries[0]?.continent}</p>
               <p>Subregion: {countries[0]?.subregion}</p>
               <p>Area: {countries[0]?.area} km²</p>            
-              <p>Population: {countries[0]?.poblacion}</p>
+              <p>Population: {countries[0]?.population}</p>
               <p>ID: {countries[0]?.key}</p>
         </div>
 
@@ -64,13 +64,13 @@ function Detail () {
             <img src={e.imagen} />
         </div>)
         : 
-        <div>
+        <div className={Activities__null}>
           <h3>
           there is no designated activity for this country
           </h3>
           <p>do you want to create one?</p>
           <Link to="/countries/activities/create">
-            <button>
+            <button className={button85}>
              Create New activity
             </button>
           </Link>

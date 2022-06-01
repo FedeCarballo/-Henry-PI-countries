@@ -34,6 +34,12 @@ export function filterCountriesByContinent(payload){
     }
 }
 
+export function OrderByName(payload){
+    return{
+        type: "FILTER_BY_NAME",
+        payload
+    }
+}
 //activities: 
 export function getAllActivities(){
     return async (dispatch)=>{ 
