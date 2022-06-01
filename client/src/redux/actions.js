@@ -27,6 +27,7 @@ export function Getinput(name){
 }
 // Countries Filters:
 export function filterCountriesByContinent(payload){
+    console.log(payload);
         return {
             type: "FILTER_BY_CONTINENT",
             payload
@@ -64,3 +65,12 @@ export function createActivity(payload){
         return data;
     }
 }
+
+export function deleteActivity(payload) { 
+    return async (dispatch) => {
+        return axios.delete("http://localhost:3001/activities/delete/" + payload)
+        .then(res => dispatch({
+            type: "DELETE_ACTIVITY", payload: res.data
+        }))
+    }
+  }

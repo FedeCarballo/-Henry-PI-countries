@@ -12,7 +12,7 @@ router.get('/', async (req,res) =>{
                 model: Country,
                 atributes: [  "name", "capital","continent","subregion", "id"],
                 through:{
-                atributes:["name"]
+                atributes:[]
                 }
             }
        })

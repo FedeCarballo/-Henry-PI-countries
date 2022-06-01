@@ -37,14 +37,17 @@ function Searchbar() {
             <div className={Search__filters}>
                 <label>Order countries By:</label>
                 <select onChange={e => handleFilterAlphabetical(e)} >
+                    <option value=" ">Alphabetical</option>
                     <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
-                <select onChange={e => handleFiltePopulation(e)} name="Population">
+                <select onChange={e => handleFiltePopulation(e)}>
+                    <option value=" ">Population</option>
                     <option value="low">Population: low to high</option>
                     <option value="high">Population: high to low</option>
                 </select>
                 <select onChange={e => handleFilterContinent(e)}>
+                    <option value= "">Continent</option>
                     <option value="All">All continents</option>
                     <option value="Africa">Africa</option>
                     <option value="Asia">Asia</option>

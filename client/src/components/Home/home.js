@@ -5,7 +5,7 @@ import Pagination from '../Pagination/Pagination';
 import {  getAllCountries } from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
-import './Home.css'
+import {CardsContainer} from './Home.module.css'
 import Navbar from '../Navbar/Navbar';
 import Searchbar from '../Searchbar/Searchbar';
 
@@ -49,7 +49,7 @@ function Home() {
             <Loading /> : 
             <div>
 
-        <div className='CardsContainer'>
+        <div className={CardsContainer}>
             {currentCountries.map((e,i) => 
             <SingleCard key={i} 
             continent={e.continente}

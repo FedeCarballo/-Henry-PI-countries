@@ -56,9 +56,9 @@ function reducer(state=initialState, {type, payload}){
             }
             
         case "FILTER_BY_POPULATION":
-            
-            const SortPopulation = payload === "low" ? 
-            state.countries.sort(function(a,b){
+            let population = state.countries
+            const SortPopulation = payload  === "low" ? 
+            population.sort(function(a,b){
                 if(a.population > b.population){
                     return 1;
                 }
@@ -67,7 +67,7 @@ function reducer(state=initialState, {type, payload}){
                 }
                 return 0
             }) :
-            state.countries.sort(function (a,b){
+            population.sort(function (a,b){
                 if(a.population> b.population){
                     return -1;
                 }
@@ -78,14 +78,10 @@ function reducer(state=initialState, {type, payload}){
             })
             return{
                 ...state,
-                countries: SortPopulation
+                countries: SortPopulation,
             }
         //End filters
-        case "RESET_PAGE":
-            return{
-                ...state,
-                currentPage: 1
-            }
+
         case "GET_NAME":
             return{
                 ...state,
@@ -106,6 +102,10 @@ function reducer(state=initialState, {type, payload}){
         case "POST_ACTIVITY":
             return{
                 ...state,
+            }
+        case "DELETE_ACTIVIY":
+            return{
+                ...state, activities: state.activities.filter(e => e.id !== payload)
             }
         default: return state
     }
