@@ -15,7 +15,7 @@ function Detail () {
     useEffect(()=>{
        dispatch(getSingleCountry(params.id))
        dispatch(getAllActivities())
-    },[dispatch])
+    },[])
 
   return (
     <div className={Detail__Container}>
@@ -36,32 +36,20 @@ function Detail () {
               <h1>{countries[0]?.name}</h1>
               <h3>{countries[0]?.capital}</h3>
           </div>
-              <img src={countries[0]?.imagen} />
-              <h2>
-                {countries[0]?.subregion}
-              </h2>
+            <img src={countries[0]?.imagen} alt={countries[0]?.name}/>
+            <h2>{countries[0]?.subregion}</h2>
         </div>
        <div className={Activities_Details}> 
-          <h2>
-            Activities:
-          </h2>
+          <h2>Activities:</h2>
        {
         countries[0]?.activities.length>0 ?
         activities.map(e => 
         <div>
-           <p>
-             {e.name}
-            </p>
-            <p>
-            difficulty: {e.dificultad}
-            </p>
-             <p>
-             duration: {e.duracion}
-            </p>
-             <p>
-             season: {e.temporada}
-            </p>
-            <img src={e.imagen} />
+              <p>{e.name}</p>
+              <p>difficulty: {e.difficulty}</p>
+              <p>duration: {e.duration}</p>
+              <p>season: {e.season}</p>
+              <img src={e.imagen} alt={e.name}/>
         </div>)
         : 
         <div className={Activities__null}>

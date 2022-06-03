@@ -8,8 +8,15 @@ import Form from './components/Form/Form';
 import About from './components/About/About';
 import Error from './components/Error/ErrorPage'
 import Searchbar from './components/Searchbar/Searchbar';
+import { useDispatch } from 'react-redux';
+import { getAllCountries } from './redux/actions';
 
 function App() {
+
+  const dispatch = useDispatch()
+  
+  dispatch(getAllCountries())
+  
   return (
     <div className="App">
       <Routes>

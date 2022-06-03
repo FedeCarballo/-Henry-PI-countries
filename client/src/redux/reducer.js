@@ -3,7 +3,6 @@ const initialState = {
     Allcountries: [],
     activities: [],
     Allactivities: [],
-    currentPage: 1
 }
 
 function reducer(state=initialState, {type, payload}){
@@ -97,15 +96,11 @@ function reducer(state=initialState, {type, payload}){
         case "CREATE_ACTIVITY":
             return{
                 ...state,
-                activities: state.activities.concat(payload)
-            }
-        case "POST_ACTIVITY":
-            return{
-                ...state,
             }
         case "DELETE_ACTIVIY":
             return{
-                ...state, activities: state.activities.filter(e => e.id !== payload)
+                ...state, 
+                activities: state.activities.filter(e => e.id !== payload)
             }
         default: return state
     }

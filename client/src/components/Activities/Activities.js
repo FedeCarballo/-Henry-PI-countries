@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteActivity, getAllActivities } from '../../redux/actions';
+import { getAllActivities } from '../../redux/actions';
 import Navbar from '../Navbar/Navbar';
 import { Link } from 'react-router-dom';
 import {Activities_countries_container, Activities_container, Activities_delete, Activities_countries, Activities_Div,Activities__empty, button85} from './Activities.module.css'
+
+
 function Activities() {
 
     const dispatch = useDispatch()
@@ -14,9 +16,6 @@ function Activities() {
         dispatch(getAllActivities())
     },[dispatch])
 
-    function HandleDelete(e){
-      dispatch(deleteActivity(e))
-    }
   return (
    (
      <div> 
@@ -25,8 +24,7 @@ function Activities() {
        
      { state.length>0 ?  //Si el length del state es mayor a 0 hago el mapeo
          state.map((e,i) => 
-         <div key={i}  className={Activities_Div}>
-           <button id={e.id} onClick={HandleDelete(`${e.id}`)} className={Activities_delete}>x</button>
+         <div key={i} id={e.id}  className={Activities_Div}>
             <h1>Name: {e.name}</h1>
             <hr/>
             <h2>Duration: {e.duration} Hs</h2>

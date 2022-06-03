@@ -20,12 +20,7 @@ router.get('/',async (req,res,next) =>{
     try {
         if(name){
             let SingleCountry = countries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()))
-            
-            if(!SingleCountry.length>0){
-              return  res.status(404).send({message: `No se encontro pais solicitado con el nombre: ${name}, por favor verifique si los caracteres ingresados son validos`}) 
-              // me trae el mensaje de error con el name del pais seleccionado indicando que no matcheo el resultado, ya que el length sera 0
-            }
-            res.send(SingleCountry.length > 0 ? SingleCountry : ` ${name}`)
+            res.send(SingleCountry.length > 0 ? SingleCountry : res.status(404).send({message: `Country not found with name: ${name},Please check the entered values`}))
         }
         else{
             if (!countries.length>0) {

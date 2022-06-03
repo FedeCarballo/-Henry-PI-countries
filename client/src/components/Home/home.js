@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom';
 import Pagination from '../Pagination/Pagination';
 import {  getAllCountries } from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';

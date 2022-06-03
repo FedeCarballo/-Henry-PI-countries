@@ -30,7 +30,7 @@ const GetCountriesdb = async () =>{
              imagen: e.imagen,
              continent: e.continent,
              subregion: e.subregion,
-             capital: e.capital, // capital no se muestra en psql ya que posee otro encode, pero en pgadmin aparece bien
+             capital: e.capital,
              area: e.area,
              population: e.population,
              googleMaps: e.googleMaps
@@ -42,6 +42,10 @@ const getCountries =  () =>{
     return  Country.findAll({
         include:{
             model: Activities,
+            attributes:[],
+            through: {
+                attributes: [],
+            }
         }
     })
 }

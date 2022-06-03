@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false
     },
-    dificulty:{
+    difficulty:{
         type: DataTypes.ENUM("1","2","3","4","5"),
         allowNull: false
     },
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM('Summer', 'Autum','Winter','Spring'),
         allowNull:false
     },
-    imagen:{
+    image:{
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "https://www.vistazo.com/vistazo/sites/default/files/field/image/2015/12/12/confused-travolta-meme.jpg"

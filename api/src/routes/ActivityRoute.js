@@ -30,13 +30,14 @@ router.get('/', async (req,res) =>{
 // Crea una actividad turística en la base de datos
 router.post('/', async (req,res) =>{
     try {
-        const { name, dificulty, duration, season, imagen, country } = req.body; 
+        const { name, difficulty, duration, season, image, country } = req.body; 
+        
         const newActivity = await Activities.create({
-             name, 
-             dificulty, 
-             duration,
-             season,
-             imagen,
+             name: name,
+             difficulty: difficulty ,
+             duration: duration,
+             season: season,
+             image : image,
         });
         const ActivitiePerCountry = await Country.findAll({
             where:{
