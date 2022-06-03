@@ -61,19 +61,16 @@ export function getAllActivities(){
 export function createActivity(payload){
     return async function (dispatch){
         const data = await axios.post("http://localhost:3001/activities",payload)
-        console.log(data)
         return data;
     }
 }
 
 
-// export function deleteActivity(payload) { 
-//     console.log(payload)
-//     return async (dispatch) => {
-//         return axios.delete("http://localhost:3001/activities/delete/" + payload)
-//         .then(res => dispatch({
-//             type: "DELETE_ACTIVITY", 
-//             payload: res.data
-//         }))
-//     }
-//   }
+ export function deleteActivity(payload) { 
+    return async (dispatch) => {
+         return axios.delete("http://localhost:3001/activities/delete/" + payload)
+        .then(res => dispatch({
+            type: "DELETE_ACTIVITY", 
+         }))
+   }
+  }

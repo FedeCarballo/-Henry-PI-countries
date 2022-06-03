@@ -29,7 +29,7 @@ router.get('/',async (req,res,next) =>{
             const c = await Country.findAll({
                 include: {
                   model: Activities,
-                  atributes: [  "name", "dificulty","duration","season", "id"],
+                  atributes: [],
                   through:{
                     atributes:[]
                     }

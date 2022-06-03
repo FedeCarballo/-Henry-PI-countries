@@ -1,20 +1,27 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllActivities } from '../../redux/actions';
+import { deleteActivity, getAllActivities } from '../../redux/actions';
 import Navbar from '../Navbar/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {Activities_countries_container, Activities_container, Activities_delete, Activities_countries, Activities_Div,Activities__empty, button85} from './Activities.module.css'
 
 
 function Activities() {
 
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const state = useSelector(state => state.activities);
 
     useEffect(()=>{
         dispatch(getAllActivities())
     },[dispatch])
+    
+  
+    function handleDelete(e){
+      dispatch(deleteActivity(e))
+      alert('actividad eliminada')
+      navigate('/countries')
+    }
 
   return (
    (
@@ -24,7 +31,8 @@ function Activities() {
        
      { state.length>0 ?  //Si el length del state es mayor a 0 hago el mapeo
          state.map((e,i) => 
-         <div key={i} id={e.id}  className={Activities_Div}>
+         <div key={e.id} id={e.id}  className={Activities_Div}>
+          <button onClick={()=> handleDelete(e.id)} className={Activities_delete}>X</button>
             <h1>Name: {e.name}</h1>
             <hr/>
             <h2>Duration: {e.duration} Hs</h2>
@@ -33,8 +41,8 @@ function Activities() {
             <h1>Countries: </h1>
         <div className={Activities_countries_container}>
           {
-            e.countries.map(c => //Hago un mapeo de los Countries pertenecientes a la actividad
-            <div className={Activities_countries}>
+            e.countries.map((c,i) => //Hago un mapeo de los Countries pertenecientes a la actividad
+            <div key={e.id} className={Activities_countries}>
             <h2 key={c.name}>{c.name}</h2>
             <img src={c.imagen} />
             <Link to={`/countries/${c.id}`} content={c.name}>

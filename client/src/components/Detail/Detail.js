@@ -1,27 +1,37 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom';
 import { getAllActivities, getSingleCountry } from '../../redux/actions';
+import Loading from '../Loading/Loading';
 import Navbar from '../Navbar/Navbar';
 import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text, button85, Activities__null} from './Detail.module.css'
 function Detail () {
 
     const params = useParams()
-
+    const [loading, setloading] = useState(false)
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries);
-    const activities = useSelector(state => state.activities);
     
     useEffect(()=>{
        dispatch(getSingleCountry(params.id))
        dispatch(getAllActivities())
     },[])
 
+    useEffect(()=>{
+      setTimeout(() => {
+          setloading(true)
+      },1500)
+  })
+
   return (
+
     <div className={Detail__Container}>
       <div className='boton_back'> 
         <Navbar />
       </div>
+      {
+         loading === false ? 
+         <Loading /> : 
     <div className={Detail_subcontainer}> 
         <div className={Country_Details}>
               <p>Continent: {countries[0]?.continent}</p>
@@ -42,14 +52,14 @@ function Detail () {
        <div className={Activities_Details}> 
           <h2>Activities:</h2>
        {
-        countries[0]?.activities.length>0 ?
-        activities.map(e => 
+        countries[0].activities?.length>0 ?
+        countries[0].activities.map(e => 
         <div>
               <p>{e.name}</p>
               <p>difficulty: {e.difficulty}</p>
-              <p>duration: {e.duration}</p>
+              <p>duration: {e.duration} hs</p>
               <p>season: {e.season}</p>
-              <img src={e.imagen} alt={e.name}/>
+              <img src={e.image} alt={e.name}/>
         </div>)
         : 
         <div className={Activities__null}>
@@ -66,6 +76,7 @@ function Detail () {
         }</div>
         
       </div>
+      }
     </div>
   )
 }
