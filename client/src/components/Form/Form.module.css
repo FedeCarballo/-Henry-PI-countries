@@ -20,11 +20,18 @@
   margin: auto;
 }
 
-
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.checkbox input {
+  margin: 0 10px ;
+}
 .Formcreate label {
   color:rgb(255, 255, 255);
   font-size: 2.5vh;
-  margin: 20px 0 20px 0;
+  margin: 20px 0;
   font-weight: 600;
 }
 
@@ -41,7 +48,38 @@
   border-radius: 15px;
   padding: 1vh;
 }
-.Formcreate button{
+.country_list{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.country_list div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 15px;
+  margin: 2vh auto;
+}
+.country_list li {
+  margin: 2vh 0;
+  padding: 1vh 0;
+  color: white;
+  font-size: 3vh; 
+}
+
+.country_list button{
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 15px;
+}
+
+
+.Formcreate .submit_button{
   width: 35%;
   margin: 30px auto;
   padding: 15px;
@@ -49,9 +87,14 @@
   border-radius: 25px;
   transition: all 800ms;
 }
-.Formcreate button:hover{
+.Formcreate .submit_button:hover{
   cursor:pointer;
-  box-shadow: rgb(0, 0, 0) -14px 20px 10px;
-  transform: scale(1.02) translateX(8px) translateY(-8px);
+  box-shadow: rgb(0, 0, 0) -10px 5px 5px;
+}
 
+.error_text{
+  color: rgb(255, 0, 0);
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
 }

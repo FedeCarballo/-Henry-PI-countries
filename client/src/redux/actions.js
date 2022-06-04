@@ -25,6 +25,7 @@ export function Getinput(name){
         }))
     }
 }
+
 // Countries Filters:
 export function filterCountriesByContinent(payload){
     console.log(payload);
@@ -40,12 +41,14 @@ export function OrderByName(payload){
         payload
     }
 }
+
 export function OrderByPopulation(payload){
     return{
         type: "FILTER_BY_POPULATION",
         payload
     }
 }
+
 export const resetPage = () => dispatch => {
     return dispatch({type: "RESET_PAGE"})
 }
@@ -63,6 +66,14 @@ export function createActivity(payload){
         const data = await axios.post("http://localhost:3001/activities",payload)
         return data;
     }
+}
+// Filter Activity:
+export function filterCountriesByActivity(payload){
+    console.log(payload);
+        return {
+            type: "FILTER_BY_ACTIVITY",
+            payload
+        }
 }
 
 

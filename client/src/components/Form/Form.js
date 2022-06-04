@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createActivity, getAllCountries } from '../../redux/actions'
 import Navbar from '../Navbar/Navbar'
-import {Form__container, Formcreate, Deletebutton} from './Form.module.css'
-
-
+import {Form__container, Formcreate, Deletebutton, checkbox, submit_button, country_list, error_text} from './Form.module.css'
 
 
 function Form() {
-    const [input, setinput] = useState({name: " ", difficulty: " ",duration: " ",season: " ",imagen: " ", country: [] })
+
+    const [input, setinput] = useState({name: " ", difficulty: " ",duration: " ",season: " ",image: " ", country: [] })
     const [errors, seterrors] = useState({})
+    const [isSubmit, setisSubmit] = useState(false)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const state = useSelector((state) => state.countries)
@@ -18,28 +19,39 @@ function Form() {
       dispatch(getAllCountries())
     },[]);
     
-    
-    function validate(input){
-         let errors = {};
-         if(input.name.length == 0) {
-           errors.name = "Name is required";
-         }
-         if (!input.difficulty){
-           errors.difficulty = "Difficulty is required"
-         }
-         if (input.duration <= 0){
-           errors.duration = "Duration is required"
-         }
-         if (!input.season == null){
-           errors.season = "Season is required"
-         }
-         if (input.country == 0){
-           errors.country = "Almost one country is required"
-         }
-         return errors
-       }
-   
+// Validacion de datos ingresados
+  
+const validate = (values) => {
+  const errors = {};
+  const nameRegular = /^[a-zA-ZÀ-ÿ\s]{4,40}$/
+  if  (!values.name) {
+      errors.name = "Name is required";
+     } else if(!nameRegular.test(values.name)){
+      errors.name = "Invalid Name format";
+     }
+  if  (!values.difficulty){
+      errors.difficulty = "Difficulty is required"
+      }
+  if  (!values.duration){
+      errors.duration = "Duration is required"
+      }
+  if  (!values.season){
+      errors.season = "Season is required"
+      }
+  if  (!values.country){
+      errors.country = "Almost one country is required"
+      }
+  return errors
+    }
 
+useEffect(() =>{
+  console.log(errors)
+ if(Object.keys(errors).length == 0 && isSubmit){
+   console.log(input)
+ }
+},[errors])
+
+//Input Handlers: 
   function handleChange(e){
     e.preventDefault();
     setinput({
@@ -53,7 +65,6 @@ function Form() {
    }
   function handlecheckDifficulty(f){
     f.preventDefault();
-
     if(f.target.checked){
       setinput({
         ...input,
@@ -91,6 +102,7 @@ function Form() {
     }))
    }
 
+//Eliminar country de la lista de countries seleccionados
    function handleDeleteCountry(d){
     setinput({
       ...input,
@@ -98,121 +110,85 @@ function Form() {
     })
   }
 
+//Handle submit con primera Validacion:
    function handlesubmit(s) {
-     s.preventDefault();
-    dispatch(createActivity(input))
-    setinput({name: '',difficulty: '',duration: '',season: '',imagen: '',country: [] })
-    alert("Actividad creada exitosamente")
-    navigate('/countries/activities')
+    s.preventDefault();
+    seterrors(validate(setinput))
+    setisSubmit(true);
+    {
+      Object.keys(errors).length == 0 && isSubmit ? ValidateSubmit() :
+      s.preventDefault()
+    }
    }
 
-console.log(errors);
+   //Validacion final, si todo se encuentra correctamente se hara la validacion por keys y luego se hara el dispatch
+   function ValidateSubmit(e){
+    dispatch(createActivity(input))
+    alert("actividad creada exitosamente")
+    navigate('/countries/activities')
+    setinput({name: '',difficulty: '',duration: '',season: '',image: '',country: [] })
+  }
+
   return (
     <div>
         <Navbar />
       <div className={Form__container}>
             <div><h1>Create Activities</h1></div>
-          <form className={Formcreate}  onSubmit={e => handlesubmit(e)}>
+          <form className={Formcreate} onSubmit={e => handlesubmit(e)}>
               <label>Name:</label>
-              <input 
-              type="text" 
-              name="name" 
-              input={input.name} 
-              onChange={(e) => handleChange(e)}/>
+              <input type="text" name="name" input={input.name} onChange={(e) => handleChange(e)}/>
               {
-                errors.name && (<p>{errors.name}</p>)
+                <p className={error_text}>{errors.name}</p>
               }
               <label>Difficulty:</label>
-
+                <div className={checkbox}>
                   <label> 
-                   <input 
-                   type='checkbox' 
-                   name='1' 
-                   value="1"
-                   onChange={(e) => handlecheckDifficulty(e)}
-                   /> 1 
+                   <input type='checkbox' name='1' value="1" onChange={(e) => handlecheckDifficulty(e)}/> 1 
                   </label> 
                   <label> 
-                    <input 
-                    type='checkbox' 
-                    name='2' 
-                    value="2"
-                    onChange={(e) => handlecheckDifficulty(e)}
-                    /> 2 
+                    <input type='checkbox' name='2' value="2" onChange={(e) => handlecheckDifficulty(e)}/> 2 
                   </label> 
                   <label> 
-                    <input 
-                    type='checkbox' 
-                    name='3' 
-                    value="3"
-                    onChange={(e) => handlecheckDifficulty(e)}
-                    /> 3
+                    <input type='checkbox' name='3' value="3" onChange={(e) => handlecheckDifficulty(e)}/> 3
                   </label> 
                   <label> 
-                    <input 
-                    type='checkbox' 
-                    name='4' 
-                    value="4"
-                    onChange={(e) => handlecheckDifficulty(e)}
-                    /> 4 
+                    <input type='checkbox' name='4' value="4" onChange={(e) => handlecheckDifficulty(e)}/> 4 
                   </label> 
                   <label> 
-                    <input 
-                    type='checkbox'
-                    name='5' 
-                    value="5"
-                    onChange={(e) => handlecheckDifficulty(e)}
-                    /> 5
+                    <input type='checkbox' name='5' value="5" onChange={(e) => handlecheckDifficulty(e)}/> 5
                   </label> 
+                  </div>
                   {
-                errors.difficulty && (<p>{errors.difficulty}</p>)
-              }
+                    <p className={error_text}>{errors.difficulty}</p>
+                  }
               <label>Duration:</label>
-              <input 
-              type="number" 
-              name='duration' 
-              input={input.duration} 
-              onChange={(e) => handleChange(e)}/> 
+              <input type="number"  name='duration'  input={input.duration}  onChange={(e) => handleChange(e)}/> 
               {
-                errors.season && (<p>{errors.season}</p>)
+                <p className={error_text}>{errors.duration}</p>
               }
               <label>Season:</label>
-                <label> 
-                  <input 
-                  type='checkbox'
-                  name='Summer'
-                  value="Summer"
-                   onChange={(e) => handlecheckSeason(e)}
-                  />Summer</label>
-                <label> 
-                  <input 
-                  type='checkbox'
-                  name='Winter'
-                  value="Winter"
-                   onChange={(e) => handlecheckSeason(e)}
-                  />Winter</label>
-                <label> 
-                  <input 
-                  type='checkbox'
-                  name='Spring'
-                  value="Spring"
-                   onChange={(e) => handlecheckSeason(e)}
-                  />Spring</label>
-               <label> 
-                  <input
-                  type='checkbox'
-                  name='Autum'
-                  value="Autum"
-                   onChange={(e) => handlecheckSeason(e)}
-                  />Autumn</label>
-
+              <div className={checkbox}> 
+              <label> 
+                  <input type='checkbox' name='Summer' value="Summer" onChange={(e) => handlecheckSeason(e)}/>Summer
+              </label>
+              <label> 
+                  <input type='checkbox' name='Winter' value="Winter" onChange={(e) => handlecheckSeason(e)}/>Winter
+              </label>
+              <label> 
+                  <input type='checkbox' name='Spring' value="Spring" onChange={(e) => handlecheckSeason(e)}/>Spring
+              </label>
+              <label> 
+                  <input type='checkbox' name='Autum' value="Autum" onChange={(e) => handlecheckSeason(e)}/>Autumn
+              </label>
+              </div>
+              {
+                <p className={error_text}>{errors.season}</p>
+              }
               <label>image:</label>
-              <input 
-              type="text" 
-              name='imagen' 
-              input={input.imagen} 
-              onChange={(e) => handleChange(e)}/>
-
+              <input type="text" name='image' input={input.image} onChange={(e) => handleChange(e)}/>
+              {
+                <p className={error_text}>{errors.image}</p>
+              }
               <label>countries:</label>
               <select onChange={(e) => handleSelectcountry(e)}>
                 {
@@ -222,19 +198,16 @@ console.log(errors);
                 }
               </select>
               {
-                errors.country && (<p>{errors.country}</p>)
+                <p className={error_text}>{errors.country}</p>
               }
 
-                 { input.country.map(d => <ul>
-                    <li>{d}</li> 
-                    <button type='button' className={Deletebutton} onClick={() => handleDeleteCountry(d)}>X</button>
+                 { input.country.map(d => <ul className={country_list}>
+                    <div>
+                      <li>{d}</li> 
+                      <button type='button' className={Deletebutton} onClick={() => handleDeleteCountry(d)}>X</button>
+                    </div>
                     </ul>)}
-
-
-             {
-               errors ? <button type='submit'>Create Activity</button> : <p>Debes completar todos los campos requeridos</p>
-             }  
-
+                <button type='submit' className={submit_button}>Create Activity</button> 
           </form>
       </div>
     </div>

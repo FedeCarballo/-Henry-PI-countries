@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../Pagination/Pagination';
-import {  getAllCountries } from '../../redux/actions'
+import {  getAllActivities, getAllCountries, resetPage } from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
 import {CardsContainer} from './Home.module.css'
@@ -12,12 +12,12 @@ function Home() {
     const [currentpage, setcurrentpage] = useState(1);
     const [countriesperpage] = useState(10);
     const [loading, setloading] = useState(false);
-    
     const countries = useSelector( state => state.countries);
     const dispatch = useDispatch()
 
     useEffect(()=>{
        dispatch(getAllCountries())
+       dispatch(getAllActivities())
     },[dispatch])
     
     //-----------------carga de la pagina------------------// 
@@ -47,7 +47,6 @@ function Home() {
             loading === false ? 
             <Loading /> : 
             <div>
-
         <div className={CardsContainer}>
             {currentCountries.map((e,i) => 
             <SingleCard key={i} 

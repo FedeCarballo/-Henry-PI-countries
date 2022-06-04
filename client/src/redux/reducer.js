@@ -86,7 +86,8 @@ function reducer(state=initialState, {type, payload}){
                 ...state,
                 countries: payload
             }
-        
+
+        //Activities
         case "GET_ALL_ACTIVITIES":
             return {
                 ...state,

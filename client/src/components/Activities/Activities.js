@@ -37,7 +37,7 @@ function Activities() {
             <hr/>
             <h2>Duration: {e.duration} Hs</h2>
             <h2>Season: {e.season}</h2>
-            <h2>difficulty: {e.dificulty}</h2>
+            <h2>difficulty: {e.difficulty}</h2>
             <h1>Countries: </h1>
         <div className={Activities_countries_container}>
           {
