@@ -1,8 +1,7 @@
 const initialState = {
     countries: [],
     Allcountries: [],
-    activities: [],
-    Allactivities: [],
+    activities: []
 }
 
 function reducer(state=initialState, {type, payload}){
@@ -98,6 +97,14 @@ function reducer(state=initialState, {type, payload}){
             return{
                 ...state,
             }
+        case "FILTER_BY_ACTIVITY":{
+            const activity = state.activities
+            const filter  = activity.filter(e => e.countries.includes(payload))
+            return{
+                ...state,
+                countries : filter
+            }
+        }
         case "DELETE_ACTIVIY":
             return{
                 ...state, 

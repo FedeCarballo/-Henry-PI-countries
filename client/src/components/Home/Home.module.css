@@ -13,9 +13,3 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
-.CardsContainer div{
-    transition: all 1s ease-in-out;
-    width: 15%;
-    margin: 3vh 4vh;
-}

@@ -4,7 +4,9 @@
     flex-direction: row;
     justify-content: space-around;
 }
-
+.OrderCountries{
+    margin: 1vh 0 !important;
+}
 .Search__filters{
     align-self: center;
 }
@@ -41,6 +43,8 @@ select option{
     font-size: 1.5rem;
     border-radius: 15px;
     width: 550px;
+    height:50%;
+    align-self: center;
     border: none;
     outline: none;
     color: white;

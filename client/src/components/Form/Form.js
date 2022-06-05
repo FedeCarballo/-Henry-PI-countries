@@ -8,7 +8,7 @@ import {Form__container, Formcreate, Deletebutton, checkbox, submit_button, coun
 
 function Form() {
 
-    const [input, setinput] = useState({name: " ", difficulty: " ",duration: " ",season: " ",image: " ", country: [] })
+    const [input, setinput] = useState({name: "", difficulty: " ",duration: " ",season: " ",image: "", country: [] })
     const [errors, seterrors] = useState({})
     const [isSubmit, setisSubmit] = useState(false)
 
@@ -24,6 +24,7 @@ function Form() {
 const validate = (values) => {
   const errors = {};
   const nameRegular = /^[a-zA-ZÀ-ÿ\s]{4,40}$/
+  const UrlRegular = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png)/g
   if  (!values.name) {
       errors.name = "Name is required";
      } else if(!nameRegular.test(values.name)){
@@ -34,6 +35,9 @@ const validate = (values) => {
       }
   if  (!values.duration){
       errors.duration = "Duration is required"
+      }
+  if (!UrlRegular.test(values.image) ){
+      errors.image = "Invalid img url format"
       }
   if  (!values.season){
       errors.season = "Season is required"
@@ -46,7 +50,7 @@ const validate = (values) => {
 
 useEffect(() =>{
   console.log(errors)
- if(Object.keys(errors).length == 0 && isSubmit){
+ if(Object.keys(errors).length === 0 && isSubmit){
    console.log(input)
  }
 },[errors])
@@ -116,7 +120,7 @@ useEffect(() =>{
     seterrors(validate(setinput))
     setisSubmit(true);
     {
-      Object.keys(errors).length == 0 && isSubmit ? ValidateSubmit() :
+      Object.keys(errors).length === 0 && isSubmit ? ValidateSubmit() :
       s.preventDefault()
     }
    }
@@ -133,7 +137,7 @@ useEffect(() =>{
     <div>
         <Navbar />
       <div className={Form__container}>
-            <div><h1>Create Activities</h1></div>
+            <div><h1>Create Activity</h1></div>
           <form className={Formcreate} onSubmit={e => handlesubmit(e)}>
               <label>Name:</label>
               <input type="text" name="name" input={input.name} onChange={(e) => handleChange(e)}/>
