@@ -7,7 +7,6 @@ import {Activities_countries_container, Activities_container, Activities_delete,
 
 
 function Activities() {
-
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const state = useSelector(state => state.activities);
@@ -18,14 +17,9 @@ function Activities() {
     
   
     function handleDelete(e){
-     confirm("Desea eliminar la actividad?")
-      if (confirm == false){
-        e.preventDefault;
-      }
-      {
-        dispatch(deleteActivity(e))
-        navigate('/countries')
-      }
+      dispatch(deleteActivity(e))
+      alert('actividad eliminada')
+      navigate('/countries')
     }
 
   return (
@@ -38,7 +32,7 @@ function Activities() {
         <div key={e.id} id={e.id}  className={Activities_Div}>
           <div className={div1}>
             {/* Informacion de la actividad traida */}
-            <button onClick={handleDelete(e.id)} className={Activities_delete}>X</button>
+            <button onClick={()=> handleDelete(e.id)} className={Activities_delete}>X</button>
               <h1>Name: {e.name}</h1>
               <hr/>
               <h2>Duration: {e.duration} Hs</h2>
@@ -46,7 +40,6 @@ function Activities() {
               <h2>difficulty: {e.difficulty}</h2>
               <h1>Countries: </h1>
             <div className={Activities_countries_container}>
-
               {e.countries.map((c,i) => //Hago un mapeo de los Countries pertenecientes a la actividad
                 <div key={e.id} className={Activities_countries}>
                 <h2 key={c.name}>{c.name}</h2>
@@ -60,10 +53,9 @@ function Activities() {
           <div className={div2}>
             < img src={e.image} alt={e.name} className={activity_image}/>
           </div>
-            
         </div>)
-          : 
-          <div className={Activities__empty}> 
+          : //Si no hay activities, retorno un empty div
+          <div className={Activities__empty}>
             <h3>There's not activities yet..</h3>
             <p>do you want to create one?</p>
             <Link to="/countries/activities/create">

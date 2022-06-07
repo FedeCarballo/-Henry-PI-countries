@@ -1,7 +1,9 @@
 const initialState = {
     countries: [],
     Allcountries: [],
-    activities: []
+    activities: [],
+    Allactivities: [],
+    currentPage: '',
 }
 
 function reducer(state=initialState, {type, payload}){
@@ -29,17 +31,20 @@ function reducer(state=initialState, {type, payload}){
             }
         
         case "FILTER_BY_NAME":
-            const Sort = payload === "asc" ? 
-            state.countries.sort(function(a,b){
-                if(a.name > b.name){
-                    return 1;
-                }
-                if (a.name < b.name){
-                    return -1
-                }
-                return 0
-            }) :
-            state.countries.sort(function (a,b){
+            const countriesSort = state.countries;
+            if(payload === "asc"){
+                countriesSort.sort(function(a,b){
+                    if(a.name > b.name){
+                        return 1;
+                    }
+                    if (a.name < b.name){
+                        return -1
+                    }
+                    return 0
+                })
+            }
+            else if (payload === "desc") {
+            countriesSort.sort(function (a,b){
                 if(a.name> b.name){
                     return -1;
                 }
@@ -47,10 +52,11 @@ function reducer(state=initialState, {type, payload}){
                     return 1;
                 }
                 return 0
-            })
+            })}
             return{
                 ...state,
-                countries: Sort
+                countries: countriesSort,
+                currentPage:1,
             }
             
         case "FILTER_BY_POPULATION":
@@ -77,6 +83,7 @@ function reducer(state=initialState, {type, payload}){
             return{
                 ...state,
                 countries: SortPopulation,
+                currentPage:1
             }
         //End filters
 
@@ -98,13 +105,19 @@ function reducer(state=initialState, {type, payload}){
                 ...state,
             }
         case "FILTER_BY_ACTIVITY":{
-            const activity = state.activities
-            const filter  = activity.filter(e => e.countries.includes(payload))
+            const CountriesActivities = state.Allcountries
+            const filter2  = payload === "All" ? CountriesActivities : 
+            CountriesActivities.filter(e => e.activities && e.activities.map(c => c.name).includes(payload))
             return{
                 ...state,
-                countries : filter
+                countries : filter2
             }
         }
+        case "RESET_PAGE":
+            return{
+                ...state,
+                currentPage: 1
+            }
         case "DELETE_ACTIVIY":
             return{
                 ...state, 

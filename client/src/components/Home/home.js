@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../Pagination/Pagination';
-import {  getAllActivities, getAllCountries, resetPage } from '../../redux/actions'
+import {  getAllActivities, getAllCountries, resetPage} from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
-import {CardsContainer} from './Home.module.css'
+import {CardsContainer,button} from './Home.module.css'
 import Navbar from '../Navbar/Navbar';
 import Searchbar from '../Searchbar/Searchbar';
 
@@ -24,8 +24,11 @@ function Home() {
     useEffect(()=>{
         setTimeout(() => {
             setloading(true)
-        },1100)
+        },1500)
     })
+    function HandleOrder(e){
+        setloading(false)
+    }
     //-----------------carga de la pagina------------------// 
 
     //-----------------Paginacion------------------// 
@@ -43,6 +46,9 @@ function Home() {
     <div>
         <Navbar />
         <Searchbar />
+        <button onClick={(e) => HandleOrder(e)} className={button}>
+                Order
+        </button>
         {
             loading === false ? 
             <Loading /> : 

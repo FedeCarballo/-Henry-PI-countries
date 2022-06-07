@@ -18,7 +18,7 @@ export function getSingleCountry(id){
 //Search:
 export function Getinput(name){
     return async (dispatch) =>{
-        return axios("http://localhost:3001/countries?name=" + name)
+        return await axios("http://localhost:3001/countries?name=" + name)
         .then(res => dispatch({
             type: "GET_NAME",
             payload: res.data
@@ -28,7 +28,6 @@ export function Getinput(name){
 
 // Countries Filters:
 export function filterCountriesByContinent(payload){
-    console.log(payload);
         return {
             type: "FILTER_BY_CONTINENT",
             payload
@@ -69,11 +68,10 @@ export function createActivity(payload){
 }
 // Filter Activity:
 export function filterCountriesByActivity(payload){
-    console.log(payload);
-        return {
-            type: "FILTER_BY_ACTIVITY",
-            payload
-        }
+    return {
+        type: "FILTER_BY_ACTIVITY",
+        payload
+    }
 }
 
 
