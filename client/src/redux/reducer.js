@@ -29,7 +29,6 @@ function reducer(state=initialState, {type, payload}){
                 ...state,
                 countries: filter,
             }
-        
         case "FILTER_BY_NAME":
             const countriesSort = state.countries;
             if(payload === "asc"){

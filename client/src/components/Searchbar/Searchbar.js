@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from 'react-redux'
-import { filterCountriesByActivity, filterCountriesByContinent, Getinput, OrderByName, OrderByPopulation} from '../../redux/actions'
+import { AsianFilter, filterCountriesByActivity, filterCountriesByContinent, Getinput, OrderByName, OrderByPopulation} from '../../redux/actions'
 import {Search,Search__filters, Search__search, OrderCountries} from './Searchbar.module.css'
 import icon from '../../assets/search.svg'
 import { useState } from 'react'
@@ -26,6 +26,7 @@ function Searchbar() {
     function handleFilterActivity(e){
         dispatch(filterCountriesByActivity(e.target.value))
     }
+
     //----------FILTROS----------//
 
     //-------ORDENAMIENTO-------//

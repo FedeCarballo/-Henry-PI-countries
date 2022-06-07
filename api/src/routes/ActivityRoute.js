@@ -17,9 +17,9 @@ router.get('/', async (req,res) =>{
             }
        })
        if(!activities.length){
-          return res.send([])
+          return  res.send([])
        }
-        res.send(activities.length >0 ? activities : null )
+        res.send(activities)
     } catch (error) {
         res.send(error)
     }
