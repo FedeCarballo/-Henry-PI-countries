@@ -43,7 +43,7 @@ function Activities() {
               {e.countries.map((c,i) => //Hago un mapeo de los Countries pertenecientes a la actividad
                 <div key={i} className={Activities_countries}>
                 <h2 key={c.name}>{c.name}</h2>
-                <img src={c.imagen} />
+                <img src={c.imagen} alt={c.name}/>
                 <Link to={`/countries/${c.id}`} content={c.name}>
                   <button className={button85}>See more Details</button>
                 </Link>

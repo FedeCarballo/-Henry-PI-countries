@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from '../Pagination/Pagination';
-import {  getAllActivities, getAllCountries, resetPage} from '../../redux/actions'
+import {  getAllActivities, getAllCountries} from '../../redux/actions'
 import SingleCard from '../SingleCard/SingleCard';
 import Loading from '../Loading/Loading';
-import {CardsContainer,button} from './Home.module.css'
+import {CardsContainer,button,Container} from './Home.module.css'
 import Navbar from '../Navbar/Navbar';
 import Searchbar from '../Searchbar/Searchbar';
 
@@ -44,7 +44,10 @@ function Home() {
 
     return (
     <div>
+        <div>
         <Navbar />
+        </div>
+        <div className={Container}>
         <Searchbar />
         <div className={button}>
         <button onClick={(e) => HandleOrder(e)} >
@@ -68,7 +71,7 @@ function Home() {
             <Pagination countriesperpage={countriesperpage} totalCountries={countries.length} paginate={paginate} />
         </div>
         }
-
+      </div>
     </div>
   )
 }

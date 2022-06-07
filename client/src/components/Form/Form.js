@@ -15,9 +15,10 @@ function Form() {
     const navigate = useNavigate()
 
     const state = useSelector((state) => state.countries)
+
     useEffect(()=>{
       dispatch(getAllCountries())
-    },[]);
+    },[dispatch]);
     
 //Primera Validacion de datos ingresados
 const validate = (values) => {
@@ -53,13 +54,6 @@ const validate = (values) => {
   };
   return errors 
     }
-
-console.log(isSubmit)
-useEffect(async () =>{
-   if(Object.keys(errors).length === 0){
-     console.log(errors);
-     }
-    },[errors])
 
 //Input Handlers: 
   function handleChange(e){

@@ -15,7 +15,7 @@ function Detail () {
     useEffect(()=>{
        dispatch(getSingleCountry(params.id))
        dispatch(getAllActivities())
-    },[])
+    },[dispatch])
 
     useEffect(()=>{
       setTimeout(() => {

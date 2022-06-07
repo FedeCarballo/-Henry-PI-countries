@@ -13,7 +13,7 @@ const pagination = ({countriesperpage, totalCountries, paginate}) => {
                 {
                     countriesPage &&  countriesPage.map(n => (
                         <li key={n}>
-                           <a onClick={() => paginate(n)}>{n}</a>
+                           <button  onClick={() => paginate(n)}>{n}</button>
                        </li>
                    )) 
                 }

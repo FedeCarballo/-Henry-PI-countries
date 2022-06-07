@@ -147,8 +147,14 @@ svg{
 
 @media screen and (max-width:600px) {
   .PrincipalContainer{
+    background-image: url(../../assets/wallpaper2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    width: auto;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
   .ContainerLanding{
     background-image: url(../../assets/wallpaper2.jpg);
@@ -157,7 +163,6 @@ svg{
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
   }
   .Title{
@@ -169,7 +174,7 @@ svg{
     margin: 3vh 0;
     font-size: 8vh;
     color: #00b7ff;
-    font-family: cursive;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
   .Title h1 span{
     font-size: 10vh;
@@ -180,13 +185,17 @@ svg{
     width: 100%;
     margin: 5vh auto;
     font-size: 3vh;
-    font-family: cursive;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+  .ContainerLanding{
+    height: auto;
   }
   .ContainerLanding img{
     display: none;
   }
   .ContainerLinks{
     width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
   }
@@ -200,9 +209,6 @@ svg{
     align-items: center;
     justify-content: center;
 
-  }
-  svg{
-    width: 100vh;
   }
   .Author{
     width: 80%;

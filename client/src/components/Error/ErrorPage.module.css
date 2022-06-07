@@ -82,3 +82,25 @@
     top: 0;
     border-radius: 10px;
   }
+
+  @media screen and (max-width:500px) {
+    .err{
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.708);
+      backdrop-filter: blur(3px);
+    }
+    .err img{
+      width: 100%;
+      margin: auto;
+      border-radius: 15px;
+  }
+    .err h2{
+      margin-bottom: 10vh;
+    }
+  }

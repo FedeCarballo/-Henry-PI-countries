@@ -77,18 +77,18 @@ function Searchbar() {
         </div>
         <div>
         {/* Order filter */}
-        <div className={OrderCountries}>
-            <label>Order countries By:</label>
-            <select onChange={e => handleFilterAlphabetical(e)}>
-                    <option selected disabled value=" ">Alphabetical</option>
-                    <option value="asc">A-Z</option>
-                    <option value="desc">Z-A</option>
-                </select>
-                <select onChange={e => handleFiltePopulation(e)}>
-                    <option selected disabled value=" ">Population</option>
-                    <option value="low">Population: low to high</option>
-                    <option value="high">Population: high to low</option>
-                </select>
+            <div className={OrderCountries}>
+                <label>Order countries By:</label>
+                <select onChange={e => handleFilterAlphabetical(e)}>
+                        <option selected disabled value=" ">Alphabetical</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                    </select>
+                    <select onChange={e => handleFiltePopulation(e)}>
+                        <option selected disabled value=" ">Population</option>
+                        <option value="low">Population: low to high</option>
+                        <option value="high">Population: high to low</option>
+                    </select>
 
             </div>
         </div>
