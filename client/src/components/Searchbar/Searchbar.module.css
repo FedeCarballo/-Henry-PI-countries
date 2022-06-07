@@ -1,21 +1,26 @@
 .Search{
-    margin: 3vh 0;
+    margin-top: 2vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.Search div{
+    display: flex;
     justify-content: space-around;
 }
 .OrderCountries{
-    margin: 1vh 0 !important;
+    margin-top: 2.5vh;
+    margin-bottom: 1vh;
 }
 .Search__filters{
     align-self: center;
 }
-.Search__filters label{
+.Search__filters label, .OrderCountries label{
     font-size: 2rem;
     margin-right: 1vh;
     color: white;
 }
-.Search__filters select{
+.Search__filters select,.OrderCountries select{
     margin: 0 1vh;
     background-color:rgba(0, 0, 0, 0.121);
     backdrop-filter: blur(3px);
@@ -25,6 +30,7 @@
     border-radius: 15px;
     border: none;
     font-style: italic;
+    cursor: pointer;
 }
 select option{
     color: rgba(26, 25, 25, 0.603);
@@ -35,7 +41,8 @@ select option{
     display: flex;
     flex-direction: row;
 }
-.Search div input{
+
+.Search__search input{
     justify-content: center;
     background-color:rgba(0, 0, 0, 0.121);
     display: flex;
@@ -43,17 +50,18 @@ select option{
     font-size: 1.5rem;
     border-radius: 15px;
     width: 550px;
-    height:50%;
+    height:90%;
     align-self: center;
     border: none;
     outline: none;
     color: white;
 }
-input:placeholder-shown {
+.Search__search input:placeholder-shown {
     border-color: teal;
     color: rgb(255, 2, 247);
     font-style: italic;
   }
+
   input::placeholder{
       color: white;
   }

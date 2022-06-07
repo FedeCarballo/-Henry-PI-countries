@@ -15,15 +15,24 @@
 }
 
 .button{
-    background-color:rgba(0, 0, 0, 0.121);
-    margin: 0 2vh;
+    margin: auto;
     align-self: center;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 1px black;
+    width: 40px;
+    height: 40px;
+}
+.button button{
+    background-color:rgba(0, 0, 0, 0.121);
+    margin: auto;
+    align-self: center;
+    color: white;
+    font-size: 2vh;
+    padding: 1vh;
+    border: none;
+    border-radius: 10px;
     transition: all .5s ease-in-out;
 }
-.button:hover{
+.button button:hover{
     cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }

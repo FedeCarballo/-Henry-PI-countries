@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getAllActivities, getSingleCountry } from '../../redux/actions';
 import Loading from '../Loading/Loading';
 import Navbar from '../Navbar/Navbar';
-import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text, button85, Activities__null} from './Detail.module.css'
+import {Detail__div, Detail__Container, Activities_Details, Country_Details, Detail_subcontainer, Detail_div_text, button85, Activities__null,Activities_Details_container,singleCountry_div,singleCountry_div_text} from './Detail.module.css'
 function Detail () {
 
     const params = useParams()
@@ -51,14 +51,17 @@ function Detail () {
         </div>
        <div className={Activities_Details}> 
           <h2>Activities:</h2>
+          <div className={Activities_Details_container}>
        {
         countries[0].activities?.length>0 ?
         countries[0].activities.map(e => 
-        <div>
-              <p>{e.name}</p>
-              <p>difficulty: {e.difficulty}</p>
-              <p>duration: {e.duration} hs</p>
-              <p>season: {e.season}</p>
+        <div className={singleCountry_div}>
+            <div className={singleCountry_div_text}>
+              <p><span>{e.name}</span></p>
+              <p>difficulty: <span>{e.difficulty}</span></p>
+              <p>duration: <span>{e.duration}</span> hs</p>
+              <p>season: <span>{e.season}</span></p>
+            </div>
               <img src={e.image} alt={e.name}/>
         </div>)
         : 
@@ -74,7 +77,7 @@ function Detail () {
           </Link>
         </div>
         }</div>
-        
+       </div> 
       </div>
       }
     </div>

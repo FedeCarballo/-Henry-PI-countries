@@ -38,7 +38,9 @@ function Searchbar() {
 
     //-------ORDENAMIENTO-------//
   return (
-        <div className={Search}>
+    <div className={Search}>
+        <div>
+            {/* Filters */}
             <div className={Search__filters}>
                 <label>Filter countries By:</label>
                 <select onChange={e => handleFilterContinent(e)}>
@@ -52,31 +54,30 @@ function Searchbar() {
                     <option value="South America">South America</option>
                     <option value="Oceania">Oceania</option>
                 </select>
-                {/* <select onChange={e => handleFilterActivity(e)}>
-                    <option value='All'>All actitivites</option>
-                    {
-                        ActivitiesStatus?.map((e,i) => (
-                            <option key={i} value={e.name}>
-                                {e.name}
-                            </option>
-                        ))
-                    }
-                </select> */}
                 {
-                    ActivitiesStatus.length>0 ?
+                ActivitiesStatus.length>0 ?
                     <select onChange={e => handleFilterActivity(e)}>
                         <option selected disabled>Activities</option>
                         <option value='All'>All</option>
                    { ActivitiesStatus.map(e =>
-
                         <option key={e.id} value={e.name}>
                             {e.name}
                         </option>
                         )}
                     </select>
-                    : <option disabled>No activities found</option>
+                    : 
+                <select><option selected disabled>No activities found</option></select>
                 }
-            <div className={OrderCountries}>
+            </div>
+            {/* Searchbar */}
+            <div className={Search__search}>
+                <input placeholder='Find country...' onChange={e => handleChange(e)}></input>
+                <button type='submit' onClick={(e) => handlesubmit(e)}><img src={icon} alt='search'/></button>
+            </div>
+        </div>
+        <div>
+        {/* Order filter */}
+        <div className={OrderCountries}>
             <label>Order countries By:</label>
             <select onChange={e => handleFilterAlphabetical(e)}>
                     <option selected disabled value=" ">Alphabetical</option>
@@ -90,13 +91,8 @@ function Searchbar() {
                 </select>
 
             </div>
-            </div>
-            <div className={Search__search}>
-            <input placeholder='Find country...' onChange={e => handleChange(e)}></input>
-            <button type='submit' onClick={(e) => handlesubmit(e)}><img src={icon} alt='search'/></button>
-            </div>
-
         </div>
+    </div>
     )
 }
 

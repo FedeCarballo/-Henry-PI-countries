@@ -41,7 +41,7 @@ function Activities() {
               <h1>Countries: </h1>
             <div className={Activities_countries_container}>
               {e.countries.map((c,i) => //Hago un mapeo de los Countries pertenecientes a la actividad
-                <div key={e.id} className={Activities_countries}>
+                <div key={i} className={Activities_countries}>
                 <h2 key={c.name}>{c.name}</h2>
                 <img src={c.imagen} />
                 <Link to={`/countries/${c.id}`} content={c.name}>

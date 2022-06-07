@@ -46,9 +46,11 @@ function Home() {
     <div>
         <Navbar />
         <Searchbar />
-        <button onClick={(e) => HandleOrder(e)} className={button}>
+        <div className={button}>
+        <button onClick={(e) => HandleOrder(e)} >
                 Order
         </button>
+        </div>
         {
             loading === false ? 
             <Loading /> : 
@@ -57,6 +59,7 @@ function Home() {
             {currentCountries.map((e,i) => 
             <SingleCard key={i} 
             continent={e.continent}
+            population={e.population}
             countries={currentCountries} 
             name={e.name} id={e.id} 
             imagen={e.imagen} 

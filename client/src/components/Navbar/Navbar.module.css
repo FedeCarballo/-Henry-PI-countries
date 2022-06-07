@@ -26,3 +26,50 @@
 a:hover{
     cursor: pointer;
 }
+#toggler, .Navbar_container label{
+    display: none;
+}
+@media screen and (max-width: 600px){
+    .Navbar_container nav{
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: -100;
+        color: #fff;
+        background: rgba(60, 60, 60, 0.128);
+        transition: top 0.9s;
+        display: none;
+        z-index: 100;
+    }
+    .Navbar_container a:hover{
+        color: aqua;
+    }
+    #menu:target{
+        display: block;
+        top: 0;
+    }
+    .nav__icon{
+        display: block;
+    }
+    .nav__close{
+        display: block;
+        position: absolute;
+        right: 4rem;
+        top: 2.3rem;
+    }
+    .Navbar_container ul{
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .Navbar_container ul li{
+        margin: 2rem 0;
+    }
+    .Navbar_container ul li a{
+        font-size: 3rem;
+    }
+}

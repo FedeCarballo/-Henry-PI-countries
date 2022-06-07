@@ -7,7 +7,7 @@
     width: 15%;
     margin: 2vh;
     background-color: rgba(155, 155, 155, 0.153);
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(3px);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -17,13 +17,18 @@
   color: #ffffff;
   font-size: 1rem;
   text-align: center;
-    
 }
+.card_text h2{
+  font-size: 1.3rem;
+}
+.card_text h4 span{
+  font-size: 1.5rem;
+}
+
 .card:hover {
-  border: #000000 1px solid;
   backdrop-filter: blur(10px);
   transform: scale(1.1);
-  background-color: rgba(255, 255, 255, 0.774);
+  background-color: rgb(255, 255, 255);
 }
 .card:hover .card_text{
   color: #000000;
