@@ -83,7 +83,7 @@
     border-radius: 10px;
   }
 
-  @media screen and (max-width:500px) {
+  @media screen and (max-width:700px) {
     .err{
       display: flex;
       flex-direction: column;

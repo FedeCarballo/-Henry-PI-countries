@@ -90,7 +90,6 @@ function Searchbar() {
                         <option value="low">Population: low to high</option>
                         <option value="high">Population: high to low</option>
                     </select>
-
             </div>
         </div>
     </div>

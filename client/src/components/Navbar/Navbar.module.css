@@ -49,7 +49,7 @@
     right: 10px;
     padding: 10px;
     font-size: #000;
-    font-size: 20px;
+    font-size: 2vh;
     background-color: rgba(0, 0, 0, 0);
     border: none;
 }
@@ -57,7 +57,7 @@
     width: 100%;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
     .Navbar_container{
         background-color: #fff;
         margin: 0  0 2vh 0;
@@ -85,5 +85,8 @@
     }
     .btn{
         display: block;
+    }
+    .btn:hover{
+        cursor: pointer;
     }
 }

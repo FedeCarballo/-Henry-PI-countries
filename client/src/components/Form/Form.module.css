@@ -99,7 +99,7 @@
   text-transform: uppercase;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:700px) {
   .Form__container{
     background-color: rgba(162, 162, 162, 0.113);
     backdrop-filter: blur(14px);

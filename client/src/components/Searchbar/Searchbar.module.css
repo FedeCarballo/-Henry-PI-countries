@@ -85,8 +85,7 @@ select option{
     width:60%;
 }
 
-@media screen and (max-width: 500px) {
-
+@media screen and (max-width: 700px) {
 
     .Search{
         width: 90%;
@@ -94,10 +93,13 @@ select option{
         display: flex;
         flex-direction: column;
     }
-
     .Search__filters{
         flex-direction: column;
         margin-top: 20px;
+    }
+    .Search div:first-child{
+        margin-top: 40px;
+        flex-direction: column-reverse;
     }
 
     .Search__filters select{
@@ -105,11 +107,25 @@ select option{
     }
     .Search div{
         flex-direction: column;
-        margin: 20px auto ;
-
     }
-
-
+    .Search__filters label, .OrderCountries label{
+        font-size: 1.5rem;
+        text-align: center;
+        margin-right: 1vh;
+        color: white;
+    }
+    .Search__filters select,.OrderCountries select{
+        margin: 1vh;
+        background-color:rgba(0, 0, 0, 0.121);
+        backdrop-filter: blur(3px);
+        color: white;
+        font-size: 1.2rem;
+        padding: 1rem;
+        border-radius: 15px;
+        border: none;
+        font-style: italic;
+        cursor: pointer;
+    }
     .Search__search{
         display: flex;
         flex-direction: row !important;
@@ -121,7 +137,7 @@ select option{
         background-color:rgba(255, 255, 255, 0.348);
         display: flex;
         padding: 1vh;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         border-radius: 15px;
         width: 60%;
         align-self: center;

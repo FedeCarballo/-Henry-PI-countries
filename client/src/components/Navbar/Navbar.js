@@ -23,7 +23,7 @@ function Navbar() {
     <div className={Navbar_container}>
       <nav >
         {
-          (togglemenu || screen > 500) && (
+          (togglemenu || screen > 700) && (
             <ul className={list}>
               <Link to='/'>
                     <li className={items}>Home</li> 
