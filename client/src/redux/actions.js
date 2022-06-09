@@ -23,6 +23,10 @@ export function Getinput(name){
             type: "GET_NAME",
             payload: res.data
         }))
+        .catch(error => {
+            alert("Country/Continent not found");
+            console.log(error);
+        })
     }
 }
 
@@ -48,9 +52,6 @@ export function OrderByPopulation(payload){
     }
 }
 
-export const resetPage = () => dispatch => {
-    return dispatch({type: "RESET_PAGE"})
-}
 //activities: 
 
 export function getAllActivities(){

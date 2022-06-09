@@ -9,7 +9,7 @@ function Landing() {
       <div className={ContainerLanding}>
         <div className={Title}>
           <h1>Time to <span>Travel</span></h1>
-          <h4>Find or Create your favorite activities around the world!</h4>
+
         </div>
         <Link to="/countries">
           <button className={button85}>Let's Go</button>

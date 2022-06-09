@@ -40,7 +40,7 @@ function Navbar() {
             </ul>      
           )
         }
-        <button onClick={toggleNav} className={btn}><img src={img} /></button>
+        <button onClick={toggleNav} className={btn}><img src={img} alt="Burger menu"/></button>
       </nav>
     </div>
   )

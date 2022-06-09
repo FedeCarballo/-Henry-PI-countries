@@ -18,7 +18,7 @@ function Activities() {
   
     function handleDelete(e){
       dispatch(deleteActivity(e))
-      alert('actividad eliminada')
+      alert('activity deleted successfully')
       navigate('/countries')
     }
 

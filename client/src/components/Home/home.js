@@ -33,10 +33,9 @@ function Home() {
 
     //-----------------Paginacion------------------// 
     
-    const indexLastCountries = currentpage * countriesperpage;
-    const indexFirtsCountries = indexLastCountries - countriesperpage;
-    const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries);
-    
+    const indexLastCountries = currentpage * countriesperpage; //10
+    const indexFirtsCountries = indexLastCountries - countriesperpage; //0
+    const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries); //arrray de los 10 paises
     const paginate = (n) => setcurrentpage(n)
     
     //-----------------Paginacion------------------// 

@@ -56,14 +56,15 @@ select option{
     outline: none;
     color: white;
 }
+.Search__search input::placeholder{
+    color: rgba(255, 255, 255, 0.302);
+    font-size: 2.2vh;
+}
+
 .Search__search input:placeholder-shown {
     border-color: teal;
     color: rgb(255, 2, 247);
     font-style: italic;
-  }
-
-  input::placeholder{
-      color: white;
   }
 
 .Search div button{

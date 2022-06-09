@@ -31,7 +31,6 @@ router.get('/', async (req,res) =>{
 router.post('/', async (req,res) =>{
     try {
         const { name, difficulty, duration, season, image, country } = req.body; 
-        
         const newActivity = await Activities.create({
              name: name,
              difficulty: difficulty ,
@@ -45,9 +44,7 @@ router.post('/', async (req,res) =>{
             }
         })
         await newActivity.addCountry(ActivitiePerCountry);
-
         res.status(200).send('Activity created successfully')
-
     } catch (error) {
         res.send(error)
     }
@@ -60,10 +57,10 @@ router.post('/', async (req,res) =>{
 router.delete('/delete/:id', (req,res)=> {
 
     try {
-        let {id} = req.params
+        let ID = req.params.id
         Activities.destroy({
             where: {
-                id: id
+                id: ID
             }
         })
         res.send("actividad eliminada")
@@ -72,12 +69,39 @@ router.delete('/delete/:id', (req,res)=> {
     }
 })
 
+//Modifico Actividades de mi db: 
+router.put('/:id', async(req,res) =>{
+
+    const { name, difficulty, duration, season, country } = req.body; 
+    const activitie = await Activities.findAll();
+
+    const id = req.params.id
+    if (!id || !name || !difficulty || !duration || !season || !country) {
+         return res.status(404).json({message: `No se encuentra actividad solicitada`});
+    }
+    else{
+        let ActivitieFind = activitie.find(e => e.id === parseInt(id))
+
+        if (ActivitieFind){
+            ActivitieFind.name = name;
+            ActivitieFind.difficulty = difficulty;
+            ActivitieFind.season = season;
+            ActivitieFind.country = country;
+            res.send(ActivitieFind)
+        }
+        else {
+            res.status(404).send("no hay activity")
+        }
+    }
+    
+})
+
 // Filtro actividades por id de mi db: 
 router.get('/:id', async (req,res)=>{
     try {
-        let countries = await Activities.findAll();
+        let activitie = await Activities.findAll();
         const id = req.params.id
-        const SigleActivitie = countries.filter(c => id == c.id)
+        const SigleActivitie = activitie.filter(c => id == c.id)
         
         if (!SigleActivitie.length) {
             return res.status(404).json({message: `No se encuentra actividad solicitada con el id: ${id}`});

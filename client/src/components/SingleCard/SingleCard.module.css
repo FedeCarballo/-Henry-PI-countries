@@ -36,7 +36,10 @@
   background-color: rgb(255, 255, 255);
 }
 .card:hover .card_text{
-  color: #000000;
+  color: #000000 !important;
+}
+.card:hover .card_text h1{
+  color: #000000 !important;
 }
 .card_image{
   margin: auto;

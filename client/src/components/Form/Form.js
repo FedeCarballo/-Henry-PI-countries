@@ -1,25 +1,24 @@
-import React, { useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createActivity, getAllCountries } from '../../redux/actions'
+import { createActivity, getAllCountries} from '../../redux/actions'
 import Navbar from '../Navbar/Navbar'
 import {Form__container, Formcreate, Deletebutton, submit_button, country_list, error_text} from './Form.module.css'
 
 function Form() {
 
-    const [input, setinput] = useState({name: "", difficulty: " ",duration: " ",season: " ",image: "", country: [] })
+    const [input, setinput] = useState({name:"", difficulty:"",duration:"",season:"",image:"", country: [] })
     const [errors, seterrors] = useState({})
     const [isSubmit, setisSubmit] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const state = useSelector((state) => state.countries)
-
     useEffect(()=>{
       dispatch(getAllCountries())
-    },[dispatch]);
-    
+    },[])
+    const state = useSelector((state) => state.countries)
+
 //Primera Validacion de datos ingresados
 const validate = (values) => {
   const errors = {};
@@ -29,7 +28,7 @@ const validate = (values) => {
       errors.name = "Name is required";
      }
   if(!nameRegular.test(values.name)){
-      errors.name = "Invalid Name format";
+      errors.name = "please enter a valid name: between 4 and 40 words, only letters";
      }
   if  (!values.difficulty){
       errors.difficulty = "Difficulty is required"
@@ -38,26 +37,25 @@ const validate = (values) => {
       errors.duration = "Duration is required"
       }
   if(values.duration > 11 || values.duration<1 ){
-      errors.duration = "Please select a valid "
+      errors.duration = "Please select a valid Duration: between 1 to 10 hours, Remember, duration cannot be negative"
       }
   if (!UrlRegular.test(values.image) ){
-      errors.image = "Invalid img url format"
+      errors.image = "Invalid image url format (example: https://www.impulsonegocios.com/wp-content/uploads/2020/01/ARG-Ven-sub-23.jpg)"
       }
   if  (!values.season){
       errors.season = "Season is required"
       }
-  if  (values.country === 0 || !values.country){
+  if  (!values.country || values.country.length === 0){
       errors.country = "Almost one country is required"
       }
+// Validacion del objeto errors - setea isSubmit en True si todos los campos estan ok
   if ((Object.keys(errors).length) === 0){
     setisSubmit(true)
   };
   return errors 
     }
-
 //Input Handlers: 
   function handleChange(e){
-    e.preventDefault();
     setinput({
       ...input,
       [e.target.name]: e.target.value
@@ -88,10 +86,16 @@ const validate = (values) => {
     }))
   }
   function handleSelectcountry(c){
-    setinput({
+    c.preventDefault();
+    if(Object.values(input.country).includes(c.target.value)){
+      alert("Country already selected")
+    }
+    else{
+        setinput({
       ...input,
       country: [...input.country,c.target.value]
-    })
+    })  
+    }
     seterrors(validate({
       ...input,
       country : [...input.country,c.target.value]
@@ -108,29 +112,25 @@ const validate = (values) => {
 
 //Handle submit con primera Validacion:
   async function handlesubmit(s) {
-    
     s.preventDefault();
     seterrors(validate(setinput))
-
     if(Object.keys(errors).length === 0 && isSubmit){
-      dispatch(createActivity(input))
-      alert("actividad creada exitosamente")
+      dispatch(createActivity(input)) 
+      //Validacion final, si todo se encuentra correctamente se hara la validacion por keys y luego se hara el dispatch
+      alert("activity created successfully")
       navigate('/countries/activities')
-      setinput({name: '',difficulty: '',duration: '',season: '',image: '',country: [] })
     }
     s.preventDefault()
    }
-
-   //Validacion final, si todo se encuentra correctamente se hara la validacion por keys y luego se hara el dispatch
 
   return (
     <div>
         <Navbar />
       <div className={Form__container}>
             <div><h1>Create Activity</h1></div>
-          <form  className={Formcreate} onSubmit={e => handlesubmit(e)}>
+          <form className={Formcreate} onSubmit={e => handlesubmit(e)}>
               <label>Name:</label>
-              <input onKeyUp={validate} onBlur={validate} type="text" name="name" input={input.name} onChange={(e) => handleChange(e)}/>
+              <input autocomplete="off" placeholder="activity name.." type="text" name="name" input={input.name} onChange={(e) => handleChange(e)}/>
               {
                 <p className={error_text}>{errors.name}</p>
               }
@@ -146,8 +146,8 @@ const validate = (values) => {
                   {
                     <p className={error_text}>{errors.difficulty}</p>
                   }
-              <label>Duration:</label>
-              <input type="number"  name='duration'  input={input.duration}  onChange={(e) => handleChange(e)}/> 
+              <label>Duration (in hours):</label>
+              <input type="number"  name='duration' placeholder='duration between 1 to 10 hours' input={input.duration}  onChange={(e) => handleChange(e)}/> 
               {
                 <p className={error_text}>{errors.duration}</p>
               }
@@ -163,7 +163,7 @@ const validate = (values) => {
                 <p className={error_text}>{errors.season}</p>
               }
               <label>image:</label>
-              <input type="text" name='image' input={input.image} onChange={(e) => handleChange(e)}/>
+              <input autocomplete="off" type="text" name='image' placeholder='paste url here..' input={input.image} onChange={(e) => handleChange(e)}/>
               {
                 <p className={error_text}>{errors.image}</p>
               }

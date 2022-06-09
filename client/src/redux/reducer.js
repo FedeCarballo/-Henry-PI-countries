@@ -2,8 +2,6 @@ const initialState = {
     countries: [],
     Allcountries: [],
     activities: [],
-    Allactivities: [],
-    currentPage: '',
 }
 
 function reducer(state=initialState, {type, payload}){
@@ -42,7 +40,7 @@ function reducer(state=initialState, {type, payload}){
                     return 0
                 })
             }
-            else if (payload === "desc") {
+            if (payload === "desc") {
             countriesSort.sort(function (a,b){
                 if(a.name> b.name){
                     return -1;
@@ -52,10 +50,31 @@ function reducer(state=initialState, {type, payload}){
                 }
                 return 0
             })}
+            if(payload ==="low"){
+                countriesSort.sort(function(a,b){
+                    if(a.population>b.population){
+                        return 1
+                    }
+                    if(a.population>b.population){
+                        return -1
+                    }
+                    return 0
+                })
+            }
+            if(payload ==="high"){
+                countriesSort.sort(function(a,b){
+                    if(a.population>b.population){
+                        return -1
+                    }
+                    if(a.population>b.population){
+                        return 1
+                    }
+                    return 0
+                })
+            }
             return{
                 ...state,
                 countries: countriesSort,
-                currentPage:1,
             }
             
         case "FILTER_BY_POPULATION":
@@ -82,7 +101,6 @@ function reducer(state=initialState, {type, payload}){
             return{
                 ...state,
                 countries: SortPopulation,
-                currentPage:1
             }
         //End filters
 
@@ -97,7 +115,6 @@ function reducer(state=initialState, {type, payload}){
             return {
                 ...state,
                 activities: payload,
-                Allactivities: payload,
             }
         case "CREATE_ACTIVITY":
             return{
@@ -112,11 +129,7 @@ function reducer(state=initialState, {type, payload}){
                 countries : filter2
             }
         }
-        case "RESET_PAGE":
-            return{
-                ...state,
-                currentPage: 1
-            }
+
         case "DELETE_ACTIVIY":
             return{
                 ...state, 

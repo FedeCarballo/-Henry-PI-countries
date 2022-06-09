@@ -1,6 +1,6 @@
 
 import { useDispatch, useSelector } from 'react-redux'
-import { AsianFilter, filterCountriesByActivity, filterCountriesByContinent, Getinput, OrderByName, OrderByPopulation} from '../../redux/actions'
+import {filterCountriesByActivity, filterCountriesByContinent, Getinput, OrderByName, OrderByPopulation} from '../../redux/actions'
 import {Search,Search__filters, Search__search, OrderCountries} from './Searchbar.module.css'
 import icon from '../../assets/search.svg'
 import { useState } from 'react'
@@ -30,13 +30,15 @@ function Searchbar() {
     //----------FILTROS----------//
 
     //-------ORDENAMIENTO-------//
-    function handleFilterAlphabetical(e){
+    // function handleFilterAlphabetical(e){
+    //     dispatch(OrderByName(e.target.value))
+    // }
+    // function handleFiltePopulation(e){
+    //     dispatch(OrderByPopulation(e.target.value))
+    // }
+    function handleOrder(e){
         dispatch(OrderByName(e.target.value))
     }
-    function handleFiltePopulation(e){
-        dispatch(OrderByPopulation(e.target.value))
-    }
-
     //-------ORDENAMIENTO-------//
   return (
     <div className={Search}>
@@ -72,7 +74,7 @@ function Searchbar() {
             </div>
             {/* Searchbar */}
             <div className={Search__search}>
-                <input placeholder='Find country...' onChange={e => handleChange(e)}></input>
+                <input placeholder='Find country or continent...' onChange={e => handleChange(e)}></input>
                 <button type='submit' onClick={(e) => handlesubmit(e)}><img src={icon} alt='search'/></button>
             </div>
         </div>
@@ -80,16 +82,18 @@ function Searchbar() {
         {/* Order filter */}
             <div className={OrderCountries}>
                 <label>Order countries By:</label>
-                <select onChange={e => handleFilterAlphabetical(e)}>
+                <select onChange={e => handleOrder(e)}>
                         <option selected disabled value=" ">Alphabetical</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
-                    </select>
-                    <select onChange={e => handleFiltePopulation(e)}>
-                        <option selected disabled value=" ">Population</option>
                         <option value="low">Population: low to high</option>
                         <option value="high">Population: high to low</option>
                     </select>
+                    {/* <select onChange={e => handleFiltePopulation(e)}>
+                        <option selected disabled value=" ">Population</option>
+                        <option value="low">Population: low to high</option>
+                        <option value="high">Population: high to low</option>
+                    </select> */}
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ router.get('/',async (req,res,next) =>{
 
     try {
         if(name){
-            let SingleCountry = countries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()))
+            let SingleCountry = countries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()) || c.continent.toLowerCase().includes(name.toLowerCase()))
             res.send(SingleCountry.length > 0 ? SingleCountry : res.status(404).send({message: `Country not found with name: ${name},Please check the entered values`}))
         }
         else{
@@ -35,7 +35,7 @@ router.get('/',async (req,res,next) =>{
                     }
                 }
               })
-              return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
+            return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
         }
     } catch (error) {
         next(error)
