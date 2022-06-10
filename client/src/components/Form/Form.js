@@ -19,11 +19,12 @@ function Form() {
     },[])
     const state = useSelector((state) => state.countries)
 
-//Primera Validacion de datos ingresados
+//First validation with values on input 
 const validate = (values) => {
   const errors = {};
   const nameRegular = /^[a-zA-ZÀ-ÿ\s]{4,40}$/
   const UrlRegular = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|png)/g
+  const numRegular =   /^[1-9][0-9]*$/
   if  (!values.name) {
       errors.name = "Name is required";
      }
@@ -38,6 +39,9 @@ const validate = (values) => {
       }
   if(values.duration > 11 || values.duration<1 ){
       errors.duration = "Please select a valid Duration: between 1 to 10 hours, Remember, duration cannot be negative"
+      }
+      else if (!numRegular.test(values.duration)){
+        errors.duration = "Please select a valid Duration: between 1 to 10 hours, Remember, duration cannot be negative"
       }
   if (!UrlRegular.test(values.image) ){
       errors.image = "Invalid image url format (example: https://www.impulsonegocios.com/wp-content/uploads/2020/01/ARG-Ven-sub-23.jpg)"
@@ -102,7 +106,7 @@ const validate = (values) => {
     }))
    }
 
-//Eliminar country de la lista de countries seleccionados
+//Delete Countries selected
    function handleDeleteCountry(d){
     setinput({
       ...input,
@@ -110,13 +114,12 @@ const validate = (values) => {
     })
   }
 
-//Handle submit con primera Validacion:
+//Handle submit Validation:
   async function handlesubmit(s) {
     s.preventDefault();
     seterrors(validate(setinput))
     if(Object.keys(errors).length === 0 && isSubmit){
       dispatch(createActivity(input)) 
-      //Validacion final, si todo se encuentra correctamente se hara la validacion por keys y luego se hara el dispatch
       alert("activity created successfully")
       navigate('/countries/activities')
     }
@@ -169,6 +172,7 @@ const validate = (values) => {
               }
               <label>countries:</label>
               <select onChange={(e) => handleSelectcountry(e)}>
+              <option selected disabled value=" ">Select Country</option>
                 {
                   state.map((e,i)=> 
                    ( <option key={i} value={e.name}>{e.name}</option>)
@@ -178,7 +182,6 @@ const validate = (values) => {
               {
                 <p className={error_text}>{errors.country}</p>
               }
-
                  { input.country.map(d => <ul className={country_list}>
                     <div>
                       <li>{d}</li> 

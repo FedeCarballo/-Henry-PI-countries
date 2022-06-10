@@ -4,7 +4,7 @@ const { activitiesFromDB } = require('../Controller/DataController');
 const {Activities, Country} = require('../db');
 const router = Router();
 
-// Traigo todas mis actividades de mi db: 
+// Get all activities from db: 
 router.get('/', async (req,res) =>{
     try { 
        const activities = await Activities.findAll({
@@ -25,9 +25,7 @@ router.get('/', async (req,res) =>{
     }
 })
 
-// [ ] POST /activity:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
-// Crea una actividad turística en la base de datos
+// Create an activitie on database 
 router.post('/', async (req,res) =>{
     try {
         const { name, difficulty, duration, season, image, country } = req.body; 
@@ -51,9 +49,9 @@ router.post('/', async (req,res) =>{
 })
 
 
-// funcionalidades extra de enrutados: 
+// extra: 
 
-//eliminar actividades por id:
+//Delete activitie by id: (connected in front by actions in activitie delete route)
 router.delete('/delete/:id', (req,res)=> {
 
     try {
@@ -69,7 +67,7 @@ router.delete('/delete/:id', (req,res)=> {
     }
 })
 
-//Modifico Actividades de mi db: 
+// Modify an activitie from db (not connected in front)
 router.put('/:id', async(req,res) =>{
 
     const { name, difficulty, duration, season, country } = req.body; 
@@ -96,7 +94,7 @@ router.put('/:id', async(req,res) =>{
     
 })
 
-// Filtro actividades por id de mi db: 
+// Filter activities by id
 router.get('/:id', async (req,res)=>{
     try {
         let activitie = await Activities.findAll();

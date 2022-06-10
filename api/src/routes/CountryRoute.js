@@ -12,11 +12,9 @@ router.use(express.json())
 // Si no existe ningún país mostrar un mensaje adecuado
 // Obtener un listado de los paises.
 router.get('/',async (req,res,next) =>{
-
     let name = req.query.name;
     await GetCountriesdb()
     let countries = await getCountries();
-
     try {
         if(name){
             let SingleCountry = countries.filter(c => c.name.toLowerCase().includes(name.toLowerCase()) || c.continent.toLowerCase().includes(name.toLowerCase()))
@@ -24,7 +22,7 @@ router.get('/',async (req,res,next) =>{
         }
         else{
             if (!countries.length>0) {
-              return  res.status(404).json({message: "No se encontraron paises"}); //si no cargo los paises en mi db, mostrara este error 404
+              return  res.status(404).json({message: "Error 404 database not found"}); 
             }
             const c = await Country.findAll({
                 include: {
@@ -35,7 +33,7 @@ router.get('/',async (req,res,next) =>{
                     }
                 }
               })
-            return res.send(c) //finalmente si no doy ningun parametro y si el status es 200, devolvemos el listado completo de countries
+            return res.send(c) 
         }
     } catch (error) {
         next(error)
@@ -43,10 +41,6 @@ router.get('/',async (req,res,next) =>{
     
 });
 
-// [ ] GET /countries/{idPais}:
-// Obtener el detalle de un país en particular
-// Debe traer solo los datos pedidos en la ruta de detalle de país
-// Incluir los datos de las actividades turísticas correspondientes
 router.get('/:id',async (req,res,next) =>{
     try {
     let countries = await Country.findAll(
@@ -61,8 +55,7 @@ router.get('/:id',async (req,res,next) =>{
     const id = req.params.id
     const SingleCountry = countries.filter(c => id == c.id)
     if (!SingleCountry.length) {
-        return res.status(404).json({message: `No se encontro el pais solicitado con el id: ${id}, por favor verifique si los caracteres ingresados son validos`});
-        // me trae el mensaje de error con el id del pais seleccionado indicando que no matcheo el resultado, ya que el length sera 0, de lo contrario el matcheo seria correcto y haria el res.send correctamente
+        return res.status(404).json({message: `error 404, country not found with id ${id}`});
     }
     return res.send(SingleCountry);
     } catch (error) {
@@ -70,11 +63,9 @@ router.get('/:id',async (req,res,next) =>{
     }
 });
 
-//funcionalidades extra: 
+//Extra: 
 
-//eliminar paises de mi db:
-
-//eliminar actividades por id:
+//Delete countries from my database:
 router.delete('/delete/:id', (req,res)=> {
     try {
         let {id} = req.params

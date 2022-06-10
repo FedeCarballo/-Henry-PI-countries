@@ -18,7 +18,7 @@ function Searchbar() {
         e.preventDefault()
         dispatch(Getinput(name))
     }
-    //----------FILTROS----------//
+    //----------FILTERS----------//
     function handleFilterContinent(e){
         dispatch(filterCountriesByContinent(e.target.value))
     }
@@ -27,19 +27,14 @@ function Searchbar() {
         dispatch(filterCountriesByActivity(e.target.value))
     }
 
-    //----------FILTROS----------//
+    //----------FILTERS----------//
 
-    //-------ORDENAMIENTO-------//
-    // function handleFilterAlphabetical(e){
-    //     dispatch(OrderByName(e.target.value))
-    // }
-    // function handleFiltePopulation(e){
-    //     dispatch(OrderByPopulation(e.target.value))
-    // }
+    //-------ORDER FILTER-------//
+
     function handleOrder(e){
         dispatch(OrderByName(e.target.value))
     }
-    //-------ORDENAMIENTO-------//
+    //-------ORDER FILTER-------//
   return (
     <div className={Search}>
         <div>
@@ -83,17 +78,12 @@ function Searchbar() {
             <div className={OrderCountries}>
                 <label>Order countries By:</label>
                 <select onChange={e => handleOrder(e)}>
-                        <option selected disabled value=" ">Alphabetical</option>
+                        <option selected disabled value=" ">Select One</option>
                         <option value="asc">A-Z</option>
                         <option value="desc">Z-A</option>
                         <option value="low">Population: low to high</option>
                         <option value="high">Population: high to low</option>
                     </select>
-                    {/* <select onChange={e => handleFiltePopulation(e)}>
-                        <option selected disabled value=" ">Population</option>
-                        <option value="low">Population: low to high</option>
-                        <option value="high">Population: high to low</option>
-                    </select> */}
             </div>
         </div>
     </div>

@@ -27,11 +27,10 @@ function Activities() {
      <div> 
      <Navbar />
      <div className={Activities_container}>
-     { state.length>0 ?  //Si el length del state es mayor a 0 hago el mapeo
+     { state.length>0 ?
         state.map((e,i) => 
         <div key={e.id} id={e.id}  className={Activities_Div}>
           <div className={div1}>
-            {/* Informacion de la actividad traida */}
             <button onClick={()=> handleDelete(e.id)} className={Activities_delete}>X</button>
               <h1>Name: {e.name}</h1>
               <hr/>
@@ -40,7 +39,7 @@ function Activities() {
               <h2>difficulty: {e.difficulty}</h2>
               <h1>Countries: </h1>
             <div className={Activities_countries_container}>
-              {e.countries.map((c,i) => //Hago un mapeo de los Countries pertenecientes a la actividad
+              {e.countries.map((c,i) =>
                 <div key={i} className={Activities_countries}>
                 <h2 key={c.name}>{c.name}</h2>
                 <img src={c.imagen} alt={c.name}/>
@@ -54,7 +53,7 @@ function Activities() {
             < img src={e.image} alt={e.name} className={activity_image}/>
           </div>
         </div>)
-          : //Si no hay activities, retorno un empty div
+          : 
           <div className={Activities__empty}>
             <h3>There's not activities yet..</h3>
             <p>do you want to create one?</p>

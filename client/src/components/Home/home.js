@@ -20,7 +20,7 @@ function Home() {
        dispatch(getAllActivities())
     },[dispatch])
     
-    //-----------------carga de la pagina------------------// 
+    //-----------------Loading page------------------// 
     useEffect(()=>{
         setTimeout(() => {
             setloading(true)
@@ -29,16 +29,16 @@ function Home() {
     function HandleOrder(e){
         setloading(false)
     }
-    //-----------------carga de la pagina------------------// 
+    //-----------------Loading page------------------// 
 
-    //-----------------Paginacion------------------// 
+    //-----------------Pagination------------------// 
     
     const indexLastCountries = currentpage * countriesperpage; //10
     const indexFirtsCountries = indexLastCountries - countriesperpage; //0
-    const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries); //arrray de los 10 paises
+    const currentCountries = countries.slice(indexFirtsCountries,indexLastCountries); //arrray with 10 countries
     const paginate = (n) => setcurrentpage(n)
     
-    //-----------------Paginacion------------------// 
+    //-----------------Pagination------------------// 
 
 
     return (

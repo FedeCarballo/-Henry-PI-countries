@@ -2,7 +2,7 @@ const axios = require('axios')
 const { Country, Activities } = require('../db')
 
 
-// traigo los datos de la api y los mapeo:
+// get all countries from api and map: 
 const getAllCountries = async() =>{
     let countries = ( await axios('https://restcountries.com/v3/all')).data.map(c =>({
             key: c.cca3,
@@ -19,7 +19,7 @@ const getAllCountries = async() =>{
         
 }
 
-// Llevo todos los countries a mi database
+// Get all countries from api to db
 const GetCountriesdb = async () =>{
     let countries = await getAllCountries();
     countries.map (e => (
@@ -50,7 +50,7 @@ const getCountries =  () =>{
     })
 }
 
-// Obtengo las actividades de mi db:
+//Getting activities from DB
 const activitiesFromDB = async () =>{
     return await Activities.findAll();
 }   
